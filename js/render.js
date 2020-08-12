@@ -14,8 +14,8 @@ function renderMemeEditScreen() {
             <div class="text-editor-controller">
                 <div class="layer-counter"></div>
                 <button class="text-controller-buttons text-controller-switch-line" onclick="onSwitchLine()"></button>
-                <button class="text-controller-buttons text-controller-add-line"></button>
-                <button class="text-controller-buttons text-controller-remove-line"></button>
+                <button class="text-controller-buttons text-controller-add-line" onclick="onAddLine()"></button>
+                <button class="text-controller-buttons text-controller-remove-line" onclick="onRemoveLine()"></button>
             </div>
         </div>
         <div class="text-editor-container">

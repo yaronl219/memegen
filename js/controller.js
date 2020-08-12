@@ -14,6 +14,20 @@ function onSwitchLine() {
     updateTextController()
 }
 
+function onAddLine() {
+    const newLineIdx = createLine()
+    renderMeme()
+    switchToLineNumber(newLineIdx)
+    updateTextController()
+}
+
+function onRemoveLine() {
+    if (!removeLine()) return console.log('cannot delete last row')
+    renderMeme()
+    switchToLineNumber(0)
+    updateTextController()
+}
+
 function updateTextController() {
     const layerCounter = document.querySelector('.layer-counter')
     const lineObj = getCurrentLineAndLineCount()

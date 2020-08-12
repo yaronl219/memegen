@@ -4,11 +4,11 @@ var gKeywords = {}
 
 var gImgs = [{
     id: 1,
-    url: '../meme-imgs-square/1.jpg',
+    url: 'meme-imgs-square/1.jpg',
     keywords: ['trump', 'politics']
 }, {
     id: 2,
-    url: '../meme-imgs-square/2.jpg',
+    url: 'meme-imgs-square/2.jpg',
     keywords: ['dogs', 'cute']
 }]
 
@@ -38,6 +38,38 @@ var gMeme = {
     ]
 }
 
+function removeLine() {
+    if (gMeme.lines.length === 1) return false
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    return true
+}
+
+
+function createLine() {
+    const amountOfLines = gMeme.lines.length
+    const canvasHeight = gCanvas.height
+    var newLineTop;
+    if (amountOfLines === 0) {
+        newLineTop = 100
+    } else if (amountOfLines === 1) {
+        newLineTop = (canvasHeight - 100)
+    } else {
+        newLineTop = Math.round(canvasHeight / 2)
+    }
+    var lineObject = {
+        txt: 'Edit text',
+        size: 40,
+        align: 'center',
+        textColor: 'white',
+        borderColor: 'black',
+        fontFamily: 'Impact',
+        top: newLineTop,
+        left: 250
+    }
+    gMeme.lines.push(lineObject)
+        // return the amount of lines (now the last row)
+    return amountOfLines
+}
 
 function getCurrentLineAndLineCount() {
     return { currLine: gMeme.selectedLineIdx, totalLines: gMeme.lines.length, txt: gMeme.lines[gMeme.selectedLineIdx].txt }
@@ -45,6 +77,11 @@ function getCurrentLineAndLineCount() {
 
 function changeLineFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
+}
+
+function switchToLineNumber(num) {
+    if (num >= gMeme.lines.length) return
+    gMeme.selectedLineIdx = num
 }
 
 function switchToNextLine() {
@@ -120,7 +157,6 @@ function drawText(idx, x, y) {
     gCtx.fillStyle = gMeme.lines[idx].textColor;
     gCtx.font = `${gMeme.lines[idx].size}px ${gMeme.lines[idx].fontFamily}`;
     gCtx.textAlign = gMeme.lines[idx].align;
-    console.log(text)
     gCtx.fillText(text, x, y);
     gCtx.strokeText(text, x, y);
 }
