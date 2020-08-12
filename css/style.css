@@ -2,6 +2,8 @@
     box-sizing: border-box;
     color: #989898;
     font-family: 'Roboto', sans-serif;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 img {
@@ -109,8 +111,8 @@ main {
 .text-editor-container button {
     border: none;
     background-color: white;
-    width: 16px;
-    height: 16px;
+    width: 1.8rem;
+    height: 1.8rem;
 }
 
 .text-controller-buttons:focus,
@@ -158,8 +160,8 @@ main {
 
 .text-controller-buttons {
     border: none;
-    width: 16px;
-    height: 16px;
+    width: 2rem;
+    height: 2rem;
     background-color: initial;
     margin-left: 20px;
 }
@@ -173,8 +175,8 @@ main {
 .text-directional-change-location {
     display: grid !important;
     padding-right: 0px !important;
-    grid-template-columns: repeat(3, 1rem);
-    grid-template-rows: repeat(3, 1rem);
+    grid-template-columns: repeat(3, 2rem);
+    grid-template-rows: repeat(3, 2rem);
     grid-template-areas: ". btn-up ." "btn-left . btn-right" ". btn-down .";
 }
 
@@ -228,6 +230,7 @@ main {
 @media (max-width: 650px) {
     .text-editor-head-container {
         margin: 0px;
+        padding: 0px 1rem;
     }
     .text-editor-container {
         margin: 0px 0px 10px;
