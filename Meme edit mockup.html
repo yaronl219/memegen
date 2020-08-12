@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMEGEN</title>
+    <link rel="shortcut icon" href="/img/LOGO.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/button-images.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="startMemeEdit(2)">
+    <header>
+        <div class="top-header">
+            <div class="logo-container">
+                <img src="/img/LOGO.png"> </div>
+            <nav>
+                <div class="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li>Memes</li>
+                        <li>Gallery</li>
+                        <li>About</li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="editor-container">
+                <div class="canvas-area-container">
+
+                    <div class="canvas-container">
+
+                    </div>
+
+                </div>
+                <div class="side-container">
+                    <div class="text-editor-head-container">
+                        <h3>Edit Text Lines</h3>
+                        <div class="text-editor-controller">
+                            <div class="layer-counter"></div>
+                            <button class="text-controller-buttons text-controller-switch-line" onclick="onSwitchLine()"></button>
+                            <button class="text-controller-buttons text-controller-add-line"></button>
+                            <button class="text-controller-buttons text-controller-remove-line"></button>
+                        </div>
+                    </div>
+                    <div class="text-editor-container">
+                        <div class="text-params">
+                            <select class="text-edit-btn select-dropdown" label="font selection" oninput="onChangeFont()">
+                                <option value="Impact">Impact</option>
+                                <option value="Roboto">Roboto</option>
+                                <option value="Arial">Arial</option>
+                            </select>
+                            <button class="text-edit-btn btn-minus" label="-" onclick="editTextLineParameters('-')"></button>
+                            <button class="text-edit-btn btn-plus" label="+" onclick="editTextLineParameters('+')"></button>
+                            <svg width="1" height="18" viewBox="0 0 1 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="0.5" y1="2.18557e-08" x2="0.499999" y2="18" stroke="#727272"/>
+                                </svg>
+                            <button class="text-edit-btn btn-alignLeft" label="alignLeft" onclick="editTextLineParameters('alignLeft')"></button>
+                            <button class="text-edit-btn btn-alignCenter" label="alignCenter" onclick="editTextLineParameters('alignCenter')"></button>
+                            <button class="text-edit-btn btn-alignRight" label="alignRight" onclick="editTextLineParameters('alignRight')"></button>
+
+                        </div>
+                        <div class="text-editor-lower-half">
+                            <input class="textline-edit-input" type="text" oninput="setTextLine()">
+                            <div class="text-directional-change-location">
+                                <button class="text-edit-btn btn-up" label="up" onclick="editTextLineParameters('up')"></button>
+                                <button class="text-edit-btn btn-down" label="down" onclick="editTextLineParameters('down')"></button>
+                                <button class="text-edit-btn btn-left" label="left" onclick="editTextLineParameters('left')"></button>
+                                <button class="text-edit-btn btn-right" label="right" onclick="editTextLineParameters('right')"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sticker-container"></div>
+                </div>
+            </div>
+    </main>
+
+
+    <script src="js/utils.js"></script>
+    <script src="js/layers.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/controller.js"></script>
+</body>
+
+</html>
