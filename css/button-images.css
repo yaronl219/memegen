@@ -1,31 +1,31 @@
 .btn-minus {
-    background-image: url(/img/text-edit-buttons-01.svg);
+    background-image: url(../img/text-edit-buttons-01.svg);
 }
 
 .btn-plus {
-    background-image: url(/img/text-edit-buttons-02.svg);
+    background-image: url(../img/text-edit-buttons-02.svg);
 }
 
 .btn-alignLeft {
-    background-image: url(/img/text-edit-buttons-03.svg);
+    background-image: url(../img/text-edit-buttons-03.svg);
 }
 
 .btn-alignCenter {
-    background-image: url(/img/text-edit-buttons-04.svg);
+    background-image: url(../img/text-edit-buttons-04.svg);
 }
 
 .btn-alignRight {
-    background-image: url(/img/text-edit-buttons-05.svg);
+    background-image: url(../img/text-edit-buttons-05.svg);
 }
 
 .text-controller-remove-line {
-    background-image: url(/img/text-edit-buttons-06.svg);
+    background-image: url(../img/text-edit-buttons-06.svg);
 }
 
 .text-controller-add-line {
-    background-image: url(/img/text-edit-buttons-07.svg);
+    background-image: url(../img/text-edit-buttons-07.svg);
 }
 
 .text-controller-switch-line {
-    background-image: url(/img/text-edit-buttons-08.svg);
+    background-image: url(../img/text-edit-buttons-08.svg);
 }

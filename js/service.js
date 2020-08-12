@@ -4,11 +4,11 @@ var gKeywords = {}
 
 var gImgs = [{
     id: 1,
-    url: '/meme-imgs-square/1.jpg',
+    url: '../meme-imgs-square/1.jpg',
     keywords: ['trump', 'politics']
 }, {
     id: 2,
-    url: '/meme-imgs-square/2.jpg',
+    url: '../meme-imgs-square/2.jpg',
     keywords: ['dogs', 'cute']
 }]
 

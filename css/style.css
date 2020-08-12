@@ -176,22 +176,22 @@ main {
 
 .btn-up {
     grid-area: btn-up;
-    background-image: url('/img/directional-01.svg');
+    background-image: url('../img/directional-01.svg');
 }
 
 .btn-left {
     grid-area: btn-left;
-    background-image: url('/img/directional-04.svg');
+    background-image: url('../img/directional-04.svg');
 }
 
 .btn-right {
     grid-area: btn-right;
-    background-image: url('/img/directional-03.svg');
+    background-image: url('../img/directional-03.svg');
 }
 
 .btn-down {
     grid-area: btn-down;
-    background-image: url('/img/directional-02.svg');
+    background-image: url('../img/directional-02.svg');
 }
 
 .chosen-line {
