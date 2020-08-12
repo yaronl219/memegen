@@ -46,7 +46,13 @@ function renderMemeEditScreen() {
             </div>
         </div>
         <div class="sticker-container"></div>
+        <div class="share-features-container">
+        <a class="download-btn" onclick="onDownload(this)">Download</a>
+        <a class="share-btn" onclick="onShare()">Share</a>
+    </div>
     </div>`
+    window.addEventListener('resize', () => checkWindowWidth())
+
 }
 
 function renderGalleryScreen() {

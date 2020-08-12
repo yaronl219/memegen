@@ -14,4 +14,5 @@ function selectImageAndStartEdit(imgId) {
     updateTextController()
     startMemeEdit(1)
     renderMeme()
+    checkWindowWidth()
 }

@@ -82,13 +82,17 @@ main {
 
 .canvas {
     border-radius: 10px;
-    margin: 5px;
+    /* margin: 5px; */
     /* position: absolute; */
 }
 
 .canvas-container {
-    margin-top: 5%;
-    max-height: 100%;
+    margin: 1rem;
+    border-radius: 10px;
+    padding: 0px;
+    background-position: center;
+    background-size: cover;
+    /* max-height: 100%; */
 }
 
 .text-editor-container {
@@ -196,4 +200,39 @@ main {
 
 .chosen-line {
     color: #727272
+}
+
+.share-features-container {
+    align-self: flex-end;
+    padding: 1rem 2rem;
+    /* height: 3rem; */
+    display: flex;
+    align-items: center;
+}
+
+.share-features-container a {
+    background-color: #FF9826;
+    border: 1px solid #ff9826;
+    border-radius: 35px;
+    color: white;
+    padding: 1rem 2rem;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.share-features-container a:hover {
+    background-color: #eca14a;
+    transition: 0.2s;
+}
+
+@media (max-width: 650px) {
+    .text-editor-head-container {
+        margin: 0px;
+    }
+    .text-editor-container {
+        margin: 0px 0px 10px;
+    }
+    .share-features-container {
+        /* margin: 10px 5px; */
+    }
 }

@@ -38,6 +38,19 @@ var gMeme = {
     ]
 }
 
+
+function getEditBox() {
+
+}
+
+function repositionOnResize(width, height) {
+    gMeme.lines.forEach(line => {
+        line.top = line.top * height
+        line.left = line.left * width
+        line.size = line.size * ((height + width) / 2)
+    });
+}
+
 function removeLine() {
     if (gMeme.lines.length === 1) return false
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
@@ -48,11 +61,12 @@ function removeLine() {
 function createLine() {
     const amountOfLines = gMeme.lines.length
     const canvasHeight = gCanvas.height
+    const canvasWidth = gCanvasSize.width
     var newLineTop;
     if (amountOfLines === 0) {
-        newLineTop = 100
+        newLineTop = Math.round(canvasHeight * 0.2)
     } else if (amountOfLines === 1) {
-        newLineTop = (canvasHeight - 100)
+        newLineTop = Math.round(canvasHeight * 0.8)
     } else {
         newLineTop = Math.round(canvasHeight / 2)
     }
@@ -64,7 +78,7 @@ function createLine() {
         borderColor: 'black',
         fontFamily: 'Impact',
         top: newLineTop,
-        left: 250
+        left: Math.round(canvasWidth / 2)
     }
     gMeme.lines.push(lineObject)
         // return the amount of lines (now the last row)

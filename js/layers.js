@@ -1,8 +1,8 @@
 function addLayer() {
     const canvasBase = document.querySelector('.canvas-container')
     const refCanvas = document.querySelector('.fake-canvas-base')
-    const canvasWidth = 500
-    const canvasHeight = 500
+    const canvasWidth = gCanvasSize.width
+    const canvasHeight = gCanvasSize.height
         // const canvasLeft = refCanvas.offsetLeft
         // const canvasTop = refCanvas.offsetTop
     const layerNumber = gLayers.length
