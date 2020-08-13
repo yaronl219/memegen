@@ -178,16 +178,27 @@ function onSwitchLine() {
     updateTextController()
 }
 
-function onChangeFontColor(el) {
-    console.log(el.id)
-    if (el.id === 'color-choice') {
-        changeTextColor(el.value)
+function onChangeColor(el, kind, color) {
+    const palette = document.querySelector('.color-pallete-container')
+    palette.classList.toggle('hidden')
+    if (kind === 'text') {
+        changeTextColor(color)
     } else {
-        changeTextBorderColor(el.value)
+        changeTextBorderColor(color)
     }
-    renderMeme()
-
 }
+
+
+// function onChangeFontColor(el) {
+//     console.log(el.id)
+//     if (el.id === 'color-choice') {
+//         changeTextColor(el.value)
+//     } else {
+//         changeTextBorderColor(el.value)
+//     }
+//     renderMeme()
+
+// }
 
 
 function onAddLine() {
