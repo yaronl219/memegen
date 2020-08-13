@@ -43,10 +43,30 @@ var gMeme = {
 }
 
 
+function dragImage(x, y, clientX, clientY) {
+    var selectedLine = isClickedPixelLine(clientX, clientY)
+    if (selectedLine === false) return
+    switchToLineNumber(selectedLine)
+    gMeme.lines[gMeme.selectedLineIdx].top += y
+    gMeme.lines[gMeme.selectedLineIdx].left += x
+}
+
+function getTextEditParams() {
+    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    const yCoord = currLine.boundingBox.top
+    const xCoord = currLine.boundingBox.left + currLine.boundingBox.width
+    const fontSize = currLine.size
+    return { xCoord, yCoord, fontSize }
+}
 
 function toggleEventListeners(shouldAdd) {
     if (shouldAdd) {
         document.addEventListener('click', () => onWindowClick(event))
+        document.addEventListener('mousemove', () => onMouseDrag(event))
+        document.addEventListener('touchmove', () => onTouchMove(event))
+        document.addEventListener('touchstart', () => onTouchStartAndEnd(event, true))
+        document.addEventListener('touchend', () => onTouchStartAndEnd(event, false))
+
     } else {
         document.removeEventListener('click', () => onWindowClick(event))
     }
@@ -105,13 +125,21 @@ function changeLineFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
 }
 
-function selectLineDirectly(x, y) {
+function isClickedPixelLine(x, y) {
     for (var i = gMeme.lines.length - 1; i >= 0; i--) {
         const boundingBox = gMeme.lines[i].boundingBox
         if (boundingBox.left <= x && boundingBox.top <= y && boundingBox.left + boundingBox.width >= x && boundingBox.top + boundingBox.height >= y) {
-            switchToLineNumber(i)
+            console.log(i)
+            return i
         }
     }
+    return false
+}
+
+function selectLineDirectly(x, y) {
+    const selectedLine = isClickedPixelLine(x, y)
+    if (selectedLine === false) return
+    return switchToLineNumber(selectedLine)
 }
 
 function switchToLineNumber(num) {

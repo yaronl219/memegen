@@ -4,6 +4,8 @@ var gCanvas;
 var gCtx;
 var gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
 var gIsCanvasTarget = false
+var gTimeInterval;
+var gTouchCoords;
 
 
 
@@ -12,11 +14,61 @@ function init() {
     switchToGalleryScreen()
 }
 
-// function onKeyPress(event) {
-//     if (!gIsCanvasTarget) return
-//     const currKey = event.key
-//     getInCanvasKeyPress(currKey)
-// }
+function onTouchStartAndEnd(ev, isTouchStart) {
+    if (isTouchStart && ev.target === gCanvas) {
+        gTouchCoords = { x: ev.changedTouches[0].clientX, y: ev.changedTouches[0].clientY }
+    } else {
+        gTouchCoords = null;
+    }
+}
+
+function onTouchMove(ev) {
+    if (gTouchCoords && ev.target === gCanvas) {
+        const clientX = ev.changedTouches[0].clientX
+        const clientY = ev.changedTouches[0].clientY
+        const movementX = clientX - gTouchCoords.x
+        const movementY = clientY - gTouchCoords.y
+        gTouchCoords = { x: gTouchCoords.x += movementX, y: gTouchCoords.y += movementY }
+        dragImage(movementX, movementY, clientX - gCanvas.offsetLeft, clientY - gCanvas.offsetTop)
+        renderMeme()
+    }
+}
+
+function onMouseDrag(ev) {
+    if (ev.buttons > 0 && ev.target === gCanvas) {
+        dragImage(ev.movementX, ev.movementY, ev.clientX - gCanvas.offsetLeft, ev.clientY - gCanvas.offsetTop)
+        renderMeme()
+    }
+}
+
+function drawEditMarker(shouldStart) {
+    const displayMarker = document.querySelector('.canvas-place-marker')
+    const canvasLocation = document.querySelector('.canvas')
+
+
+    if (shouldStart) {
+        startInterval()
+    } else {
+        stopInterval()
+    }
+
+    function startInterval() {
+        stopInterval()
+        gTimeInterval = setInterval(() => {
+            var displayMarkerParams = getTextEditParams()
+            displayMarker.style.fontSize = `${displayMarkerParams.fontSize *1.4}px`
+            displayMarker.style.top = `${displayMarkerParams.yCoord + canvasLocation.offsetTop }px`
+            displayMarker.style.left = `${displayMarkerParams.xCoord+ canvasLocation.offsetLeft - 15}px`
+            displayMarker.classList.toggle('hidden')
+        }, 200);
+    }
+
+    function stopInterval() {
+        clearInterval(gTimeInterval)
+        displayMarker.classList.add('hidden')
+    }
+
+}
 
 function openHamburgerMenu() {
     const menuContainer = document.querySelector('.mobile-menu')
@@ -55,21 +107,22 @@ function highlightRelevantNavs(state) {
 }
 
 function onWindowClick(event) {
-    // if user clicked within the canvas - trigger the line selection
+    // if user clicked within the canvas - trigger the line selection and focus on the hidden line for inline editing
     if (event.target === gCanvas) {
-        gIsCanvasTarget = true
         document.querySelector('.hidden-text-line').focus()
         onSelectLineDirectly(event)
     } else {
-        gIsCanvasTarget = false
+        drawEditMarker(false)
     }
 }
 
 function onSelectLineDirectly(event) {
+    // console.log(event)
     const xAxis = event.offsetX
     const yAxis = event.offsetY
     selectLineDirectly(xAxis, yAxis)
     updateTextController()
+    drawEditMarker(true)
 
 }
 

@@ -58,11 +58,3 @@ function renderMemeEditScreen() {
     window.addEventListener('resize', () => checkWindowWidth())
 
 }
-
-function renderGalleryScreen() {
-    const el = document.querySelector('.main-container')
-    el.innerHTML = `<div class="search-bar-container">
-                        <input type="search" class="search-bar-input">
-                    </div>
-                    <div class="meme-gallery"></div>`
-}

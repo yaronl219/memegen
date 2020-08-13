@@ -22,6 +22,14 @@ function filterByKeword(keyword) {
     // TODO - make it work
 }
 
+function renderGalleryScreen() {
+    const el = document.querySelector('.main-container')
+    el.innerHTML = `<div class="search-bar-container">
+                        <input type="search" class="search-bar-input">
+                    </div>
+                    <div class="meme-gallery"></div>`
+}
+
 
 var gImgs = [{
         id: 1,
