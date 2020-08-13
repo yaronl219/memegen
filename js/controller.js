@@ -3,8 +3,20 @@
 var gCanvas;
 var gCtx;
 var gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
+var gIsCanvasTarget = false
 
 
+
+function init() {
+    toggleEventListeners(true)
+    switchToGalleryScreen()
+}
+
+// function onKeyPress(event) {
+//     if (!gIsCanvasTarget) return
+//     const currKey = event.key
+//     getInCanvasKeyPress(currKey)
+// }
 
 function openHamburgerMenu() {
     const menuContainer = document.querySelector('.mobile-menu')
@@ -42,10 +54,22 @@ function highlightRelevantNavs(state) {
 
 }
 
+function onWindowClick(event) {
+    // if user clicked within the canvas - trigger the line selection
+    if (event.target === gCanvas) {
+        gIsCanvasTarget = true
+        document.querySelector('.hidden-text-line').focus()
+        onSelectLineDirectly(event)
+    } else {
+        gIsCanvasTarget = false
+    }
+}
+
 function onSelectLineDirectly(event) {
     const xAxis = event.offsetX
     const yAxis = event.offsetY
     selectLineDirectly(xAxis, yAxis)
+    updateTextController()
 
 }
 
@@ -117,9 +141,10 @@ function updateTextController() {
     const totalLines = lineObj.totalLines
     layerCounter.innerHTML = `<span class="chosen-line">${currLine+1}</span><span>/${totalLines}</span>`
 
-    const textInputField = document.querySelector('.textline-edit-input')
+    // const textInputField = document.querySelector('.textline-edit-input')
     const currLineText = lineObj.txt
-    textInputField.value = currLineText
+        // textInputField.value = currLineText
+    updateTextInputsValue(currLineText)
 }
 
 function onChangeFont() {
@@ -148,7 +173,16 @@ function renderMeme() {
     drawImgFromlocal()
 }
 
-function setTextLine() {
-    const txt = document.querySelector('.textline-edit-input').value
+function setTextLine(el) {
+    const txt = el.value
     changeTextLine(txt)
+    updateTextInputsValue(txt)
+}
+
+
+
+function updateTextInputsValue(txt) {
+    // TODO: to update also in updateTextController()
+    const textInputs = document.querySelectorAll('.textline-edit-input')
+    textInputs.forEach(input => input.value = txt)
 }

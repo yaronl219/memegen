@@ -39,7 +39,8 @@ function renderMemeEditScreen() {
 
             </div>
             <div class="text-editor-lower-half">
-                <input class="textline-edit-input" type="text" oninput="setTextLine()">
+                <input class="textline-edit-input" type="text" oninput="setTextLine(this)">
+                <input class="textline-edit-input hidden-text-line" type="text" oninput="setTextLine(this)">
                 <div class="text-directional-change-location">
                     <button class="text-edit-btn btn-up" label="up" onclick="onEditTextLineParameters('up')"></button>
                     <button class="text-edit-btn btn-down" label="down" onclick="onEditTextLineParameters('down')"></button>

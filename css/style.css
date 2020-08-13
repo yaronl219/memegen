@@ -222,6 +222,11 @@ main {
     flex-grow: 1;
 }
 
+.hidden-text-line {
+    width: 0px;
+    opacity: 0%;
+}
+
 .textline-edit-input:focus {
     outline-color: rgb(243, 220, 220, 0.3);
 }

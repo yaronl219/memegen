@@ -44,8 +44,13 @@ var gMeme = {
 
 
 
-
-
+function toggleEventListeners(shouldAdd) {
+    if (shouldAdd) {
+        document.addEventListener('click', () => onWindowClick(event))
+    } else {
+        document.removeEventListener('click', () => onWindowClick(event))
+    }
+}
 
 function repositionOnResize(width, height) {
     gMeme.lines.forEach(line => {
@@ -101,7 +106,6 @@ function changeLineFont(font) {
 }
 
 function selectLineDirectly(x, y) {
-    console.log(x, y)
     for (var i = gMeme.lines.length - 1; i >= 0; i--) {
         const boundingBox = gMeme.lines[i].boundingBox
         if (boundingBox.left <= x && boundingBox.top <= y && boundingBox.left + boundingBox.width >= x && boundingBox.top + boundingBox.height >= y) {
@@ -248,8 +252,7 @@ function createCanvas() {
     gCanvas = document.querySelector('.canvas-layer')
     gCtx = gCanvas.getContext('2d')
 
-    gCanvas.addEventListener('click', () => onSelectLineDirectly(event))
-
+    // toggleCanvasEventListeners(true)
 }
 
 
