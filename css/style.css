@@ -225,6 +225,7 @@ main {
 
 .hidden-text-line {
     width: 0px;
+    height: 0px;
     opacity: 0%;
 }
 
@@ -368,8 +369,6 @@ main {
         font-size: 2rem;
         padding: 0px;
         margin: 0px;
-        height: 2rem;
-        width: 2rem;
     }
     .mobile-menu-close-btn {
         color: white;

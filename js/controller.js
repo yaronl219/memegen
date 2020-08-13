@@ -4,7 +4,7 @@ var gCanvas;
 var gCtx;
 var gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
 var gIsCanvasTarget = false
-var gTimeInterval;
+var gTimeInterval = { 'blink': 0, 'reposition': 0 };
 var gTouchCoords;
 
 
@@ -12,6 +12,11 @@ var gTouchCoords;
 function init() {
     toggleEventListeners(true)
     switchToGalleryScreen()
+}
+
+function switchThroughMobileNav(fn) {
+    closeHamburgerMenu()
+    fn()
 }
 
 function onTouchStartAndEnd(ev, isTouchStart) {
@@ -54,17 +59,20 @@ function drawEditMarker(shouldStart) {
 
     function startInterval() {
         stopInterval()
-        gTimeInterval = setInterval(() => {
+        gTimeInterval.blink = setInterval(() => {
             var displayMarkerParams = getTextEditParams()
             displayMarker.style.fontSize = `${displayMarkerParams.fontSize *1.4}px`
             displayMarker.style.top = `${displayMarkerParams.yCoord + canvasLocation.offsetTop }px`
             displayMarker.style.left = `${displayMarkerParams.xCoord+ canvasLocation.offsetLeft - 15}px`
+        }, 50);
+        gTimeInterval.reposition = setInterval(() => {
             displayMarker.classList.toggle('hidden')
-        }, 200);
+        }, 500)
     }
 
     function stopInterval() {
-        clearInterval(gTimeInterval)
+        clearInterval(gTimeInterval.blink)
+        clearInterval(gTimeInterval.reposition)
         displayMarker.classList.add('hidden')
     }
 
@@ -140,9 +148,8 @@ function checkWindowWidth() {
 }
 
 function onDownload(elLink) {
-    const download = gCanvas.toDataURL('image/png')
-    elLink.href = download
-    elLink.download = "canvas.png"
+    drawImgFromlocal(true)
+
 }
 
 function resizeCanvas(width, height) {
@@ -154,13 +161,14 @@ function resizeCanvas(width, height) {
     gCanvasSize.heightRatio = heightRatio
     gCanvas.height = height
     gCanvas.width = width
-    renderMeme()
+    renderMeme(true)
+    getMemeLines()
 }
 
 function switchToGalleryScreen() {
     highlightRelevantNavs('gallery')
     renderGalleryScreen()
-    populateGallery()
+    populateGallery(gImgs)
 }
 
 function resetMeme() {
@@ -221,9 +229,12 @@ function startMemeEdit() {
     document.querySelector('.canvas-container').style.backgroundImage = `url(${getMemeImg(gMeme.selectedImgId)})`
 }
 
-function renderMeme() {
+function renderMeme(shouldDrawImage = false) {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-    drawImgFromlocal()
+    getMemeLines()
+    if (shouldDrawImage) {
+        drawImgFromlocal()
+    }
 }
 
 function setTextLine(el) {

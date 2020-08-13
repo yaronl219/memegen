@@ -1,6 +1,14 @@
 function renderMemeEditScreen() {
     const el = document.querySelector('.main-container')
-
+        // currently toggled off - can be later added
+    const dPad = `
+    <div class="text-directional-change-location">
+    <button class="text-edit-btn btn-up" label="up" onclick="onEditTextLineParameters('up')"></button>
+    <button class="text-edit-btn btn-down" label="down" onclick="onEditTextLineParameters('down')"></button>
+    <button class="text-edit-btn btn-left" label="left" onclick="onEditTextLineParameters('left')"></button>
+    <button class="text-edit-btn btn-right" label="right" onclick="onEditTextLineParameters('right')"></button>
+    </div>
+    `
     el.innerHTML = `            <div class="editor-container">
     <div class="canvas-area-container">
     <div class="back-to-gallery">
@@ -40,13 +48,7 @@ function renderMemeEditScreen() {
             </div>
             <div class="text-editor-lower-half">
                 <input class="textline-edit-input" type="text" oninput="setTextLine(this)">
-                <input class="textline-edit-input hidden-text-line" type="text" oninput="setTextLine(this)">
-                <div class="text-directional-change-location">
-                    <button class="text-edit-btn btn-up" label="up" onclick="onEditTextLineParameters('up')"></button>
-                    <button class="text-edit-btn btn-down" label="down" onclick="onEditTextLineParameters('down')"></button>
-                    <button class="text-edit-btn btn-left" label="left" onclick="onEditTextLineParameters('left')"></button>
-                    <button class="text-edit-btn btn-right" label="right" onclick="onEditTextLineParameters('right')"></button>
-                </div>
+
             </div>
         </div>
         <div class="sticker-container"></div>
@@ -54,6 +56,8 @@ function renderMemeEditScreen() {
         <a class="download-btn" onclick="onDownload(this)">Download</a>
         <a class="share-btn" onclick="onShare()">Share</a>
     </div>
+    <input class="textline-edit-input hidden-text-line" type="text" oninput="setTextLine(this)">
+
     </div>`
     window.addEventListener('resize', () => checkWindowWidth())
 

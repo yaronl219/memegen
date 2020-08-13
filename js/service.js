@@ -2,8 +2,6 @@
 
 var gKeywords = {}
 
-
-
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
@@ -110,7 +108,13 @@ function createLine() {
         borderColor: 'black',
         fontFamily: 'Impact',
         top: newLineTop,
-        left: Math.round(canvasWidth / 2)
+        left: Math.round(canvasWidth / 2),
+        boundingBox: {
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0
+        }
     }
     gMeme.lines.push(lineObject)
         // return the amount of lines (now the last row)
@@ -129,7 +133,6 @@ function isClickedPixelLine(x, y) {
     for (var i = gMeme.lines.length - 1; i >= 0; i--) {
         const boundingBox = gMeme.lines[i].boundingBox
         if (boundingBox.left <= x && boundingBox.top <= y && boundingBox.left + boundingBox.width >= x && boundingBox.top + boundingBox.height >= y) {
-            console.log(i)
             return i
         }
     }
@@ -158,14 +161,27 @@ function switchToNextLine() {
     drawOutlineBox()
 }
 
-function drawImgFromlocal() {
+
+function drawImgFromlocal(shouldDownload = false) {
     var img = new Image()
     img.crossOrigin = 'anonymous'
     img.src = getMemeImg(gMeme.selectedImgId)
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
         getMemeLines()
+        if (shouldDownload) { downloadMeme() }
     }
+}
+
+function downloadMeme() {
+    const download = gCanvas.toDataURL('image/png')
+    let elLink = document.createElement('a')
+    elLink.href = download
+    elLink.download = "canvas.png"
+    document.body.appendChild(elLink)
+    elLink.click()
+    document.body.removeChild(elLink)
+
 }
 
 function changeTextParameters(param) {
