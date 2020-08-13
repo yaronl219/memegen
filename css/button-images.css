@@ -29,3 +29,11 @@
 .text-controller-switch-line {
     background-image: url(../img/text-edit-buttons-08.svg);
 }
+
+.btn-change-font-color {
+    background-image: url(../img/brush.svg);
+}
+
+.btn-change-border-color {
+    background-image: url(../img/border.svg);
+}

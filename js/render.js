@@ -38,12 +38,17 @@ function renderMemeEditScreen() {
                 </select>
                 <button class="text-edit-btn btn-minus" label="-" onclick="onEditTextLineParameters('-')"></button>
                 <button class="text-edit-btn btn-plus" label="+" onclick="onEditTextLineParameters('+')"></button>
-                <svg width="1" height="18" viewBox="0 0 1 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="1" height="24" viewBox="0 0 1 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="0.5" y1="2.18557e-08" x2="0.499999" y2="18" stroke="#727272"/>
                     </svg>
                 <button class="text-edit-btn btn-alignLeft" label="alignLeft" onclick="onEditTextLineParameters('alignLeft')"></button>
                 <button class="text-edit-btn btn-alignCenter" label="alignCenter" onclick="onEditTextLineParameters('alignCenter')"></button>
                 <button class="text-edit-btn btn-alignRight" label="alignRight" onclick="onEditTextLineParameters('alignRight')"></button>
+                <svg width="1" height="24" viewBox="0 0 1 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0.5" y1="2.18557e-08" x2="0.499999" y2="18" stroke="#727272"/>
+                </svg>
+                <label for="border-choice" class="text-edit-btn btn-change-border-color"></label>
+                <label for="color-choice" class="text-edit-btn btn-change-font-color"></label>
 
             </div>
             <div class="text-editor-lower-half">
@@ -56,7 +61,9 @@ function renderMemeEditScreen() {
         <a class="download-btn" onclick="onDownload(this)">Download</a>
         <a class="share-btn" onclick="onShare()">Share</a>
     </div>
-    <input class="textline-edit-input hidden-text-line" type="text" oninput="setTextLine(this)">
+    <input class="textline-edit-input hidden-text-line" type="text" oninput="setTextLine(this)"></input>
+    <input id="color-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>
+    <input id="border-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>
 
     </div>`
     window.addEventListener('resize', () => checkWindowWidth())

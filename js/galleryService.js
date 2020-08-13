@@ -21,23 +21,23 @@ function calculateAspectRatio(imgId) {
 
 var gImgs = [{
         id: 1,
-        url: 'meme-imgs-square/1.jpg',
+        url: 'meme-imgs-various-aspect/003.jpg',
         keywords: ['trump', 'politics']
     }, {
         id: 2,
-        url: 'meme-imgs-square/2.jpg',
+        url: 'meme-imgs-various-aspect/004.jpg',
         keywords: ['dogs', 'cute']
     }, {
         id: 3,
-        url: 'meme-imgs-square/3.jpg',
+        url: 'meme-imgs-various-aspect/005.jpg',
         keywords: ['dogs', 'cute', 'baby', 'sleeping']
     }, {
         id: 4,
-        url: 'meme-imgs-square/4.jpg',
+        url: 'meme-imgs-various-aspect/006.jpg',
         keywords: ['cats', 'cute', 'sleeping']
     }, {
         id: 5,
-        url: 'meme-imgs-square/5.jpg',
+        url: 'meme-imgs-various-aspect/5.jpg',
         keywords: ['baby', 'success']
     },
     {
@@ -46,36 +46,36 @@ var gImgs = [{
         keywords: ['aliens']
     }, {
         id: 7,
-        url: 'meme-imgs-square/7.jpg',
+        url: 'meme-imgs-various-aspect/img5.jpg',
         keywords: ['baby', 'staring', 'surprised']
     }, {
         id: 8,
-        url: 'meme-imgs-square/8.jpg',
+        url: 'meme-imgs-various-aspect/8.jpg',
         keywords: ['tell me more', 'willy wonka', 'hatter']
     },
     {
         id: 9,
-        url: 'meme-imgs-square/9.jpg',
+        url: 'meme-imgs-various-aspect/9.jpg',
         keywords: ['baby', 'cunning']
     }, {
         id: 10,
-        url: 'meme-imgs-square/10.jpg',
+        url: 'meme-imgs-various-aspect/img11.jpg',
         keywords: ['barack obama', 'laughing']
     }, {
         id: 11,
-        url: 'meme-imgs-square/11.jpg',
+        url: 'meme-imgs-various-aspect/img12.jpg',
         keywords: ['kissing', 'boxing', 'gay']
     }, {
         id: 12,
-        url: 'meme-imgs-square/12.jpg',
+        url: 'meme-imgs-various-aspect/12.jpg',
         keywords: ['שלא יעבדו עליכם', 'pointing']
     }, {
         id: 13,
-        url: 'meme-imgs-square/13.jpg',
+        url: 'meme-imgs-various-aspect/leo.jpg',
         keywords: ['alcohol', 'cheers', 'leonardo dicaprio', 'gatsby']
     }, {
         id: 14,
-        url: 'meme-imgs-square/14.jpg',
+        url: 'meme-imgs-various-aspect/meme1.jpg',
         keywords: ['morpheus', 'matrix', 'what if i told you', 'sunglasses']
     }, {
         id: 15,
@@ -83,11 +83,11 @@ var gImgs = [{
         keywords: ['lord of the rings', 'one does not', 'boromir']
     }, {
         id: 16,
-        url: 'meme-imgs-square/16.jpg',
-        keywords: ['picard', 'star trek', 'laughing']
+        url: 'meme-imgs-various-aspect/patrick.jpg',
+        keywords: ['picard', 'star trek', 'laughing', 'patrick']
     }, {
         id: 17,
-        url: 'meme-imgs-square/17.jpg',
+        url: 'meme-imgs-various-aspect/putin.jpg',
         keywords: ['putin', 'two', 'victory', 'authority', 'russian']
     }, {
         id: 18,
@@ -102,8 +102,27 @@ var gImgs = [{
         id: 20,
         url: 'meme-imgs-various-aspect/drevil.jpg',
         keywords: ['dr. evil', 'laser', 'quotes']
+    }, {
+        id: 21,
+        url: 'meme-imgs-various-aspect/2.jpg',
+        keywords: ['sound of music', 'look at all the fucks i give']
+    }, {
+        id: 22,
+        url: 'meme-imgs-various-aspect/img2.jpg',
+        keywords: ['dancing', 'africa', 'happy', 'kids']
+    }, {
+        id: 23,
+        url: 'meme-imgs-various-aspect/img4.jpg',
+        keywords: ['trump', 'politics']
+    }, {
+        id: 24,
+        url: 'meme-imgs-various-aspect/img6.jpg',
+        keywords: ['dogs', 'begging']
+    }, {
+        id: 25,
+        url: 'meme-imgs-various-aspect/its-something.png',
+        keywords: ['something', 'comics']
     },
-
 
 
 ]

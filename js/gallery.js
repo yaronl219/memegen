@@ -10,7 +10,18 @@ function populateGallery(arr) {
 
 function getAspectRatio(imgId) {
     const imgAspectRatio = calculateAspectRatio(imgId)
+    const widthRatio = 500 / imgAspectRatio.imgWidth
+    const newWidth = 500
+    const newHeight = imgAspectRatio.imgHeight * widthRatio
+    gCanvasSize.defaultWidth = newWidth
+    gCanvasSize.defaultHeight = newHeight
+    gCanvasSize.width = newWidth
+    gCanvasSize.height = newHeight
 
+    console.log(newWidth, newHeight)
+    const resizeBy = (window.innerWidth < 650) ? 0.7 : 1
+    resizeCanvas(newWidth * resizeBy, newHeight * resizeBy)
+    repositionOnResize(1, (newHeight * resizeBy / 500))
 }
 
 
@@ -19,8 +30,11 @@ function selectImageAndStartEdit(imgId) {
     gMeme.selectedImgId = imgId
     renderMemeEditScreen()
     updateTextController()
+    resetLines()
+    resetMeme()
     startMemeEdit()
-    renderMeme()
+        // renderMeme()
+    getAspectRatio(imgId)
     checkWindowWidth()
 }
 

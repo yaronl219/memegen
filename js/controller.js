@@ -121,6 +121,7 @@ function onWindowClick(event) {
         onSelectLineDirectly(event)
     } else {
         drawEditMarker(false)
+        renderMeme(false, false)
     }
 }
 
@@ -171,14 +172,23 @@ function switchToGalleryScreen() {
     populateGallery(gImgs)
 }
 
-function resetMeme() {
-    gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
-}
 
 function onSwitchLine() {
     switchToNextLine()
     updateTextController()
 }
+
+function onChangeFontColor(el) {
+    console.log(el.id)
+    if (el.id === 'color-choice') {
+        changeTextColor(el.value)
+    } else {
+        changeTextBorderColor(el.value)
+    }
+    renderMeme()
+
+}
+
 
 function onAddLine() {
     const newLineIdx = createLine()
@@ -190,8 +200,8 @@ function onAddLine() {
 function onRemoveLine() {
     var newLine = removeLine()
     if (newLine === false) return console.log('cannot delete last row')
-    renderMeme()
     switchToLineNumber(newLine)
+    renderMeme()
     updateTextController()
 }
 
@@ -229,9 +239,9 @@ function startMemeEdit() {
     document.querySelector('.canvas-container').style.backgroundImage = `url(${getMemeImg(gMeme.selectedImgId)})`
 }
 
-function renderMeme(shouldDrawImage = false) {
+function renderMeme(shouldDrawImage = false, shouldDrawOutline = true) {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-    getMemeLines()
+    getMemeLines(shouldDrawOutline)
     if (shouldDrawImage) {
         drawImgFromlocal()
     }

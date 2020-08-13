@@ -183,11 +183,13 @@ main {
     padding: 12px
 }
 
+.text-editor-container label,
 .text-editor-container button {
     border: none;
     background-color: white;
     width: 1.8rem;
     height: 1.8rem;
+    cursor: pointer;
 }
 
 .text-controller-buttons:focus,

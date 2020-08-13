@@ -6,40 +6,45 @@ var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [{
-            txt: 'I\'m a text placeholder',
-            size: 40,
-            align: 'center',
-            textColor: 'white',
-            borderColor: 'black',
-            fontFamily: 'Impact',
-            top: 100,
-            left: 250,
-            boundingBox: {
-                left: 0,
-                top: 0,
-                width: 0,
-                height: 0
-            }
-        },
-        {
-            txt: 'Me too',
-            size: 40,
-            align: 'center',
-            textColor: 'white',
-            borderColor: 'black',
-            fontFamily: 'Impact',
-            top: 400,
-            left: 250,
-            boundingBox: {
-                left: 0,
-                top: 0,
-                width: 0,
-                height: 0
-            }
+        txt: 'I\'m a text placeholder',
+        size: 40,
+        align: 'center',
+        textColor: 'white',
+        borderColor: 'black',
+        fontFamily: 'Impact',
+        top: 100,
+        left: 250,
+        boundingBox: {
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0
         }
-    ]
+    }]
 }
 
+function resetMeme() {
+    gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
+}
+
+function resetLines() {
+    gMeme.lines = [{
+        txt: 'I\'m a text placeholder',
+        size: 40,
+        align: 'center',
+        textColor: 'white',
+        borderColor: 'black',
+        fontFamily: 'Impact',
+        top: 100,
+        left: 250,
+        boundingBox: {
+            left: 0,
+            top: 0,
+            width: 0,
+            height: 0
+        }
+    }]
+}
 
 function dragImage(x, y, clientX, clientY) {
     var selectedLine = isClickedPixelLine(clientX, clientY)
@@ -125,6 +130,14 @@ function getCurrentLineAndLineCount() {
     return { currLine: gMeme.selectedLineIdx, totalLines: gMeme.lines.length, txt: gMeme.lines[gMeme.selectedLineIdx].txt }
 }
 
+function changeTextColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].textColor = color
+}
+
+function changeTextBorderColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].borderColor = color
+}
+
 function changeLineFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
 }
@@ -168,7 +181,7 @@ function drawImgFromlocal(shouldDownload = false) {
     img.src = getMemeImg(gMeme.selectedImgId)
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
-        getMemeLines()
+        getMemeLines(false)
         if (shouldDownload) { downloadMeme() }
     }
 }
@@ -218,13 +231,17 @@ function changeTextParameters(param) {
     updateBoundingBoxParams()
 }
 
-function getMemeLines() {
+function getMemeLines(shouldDrawOutline = true) {
     gMeme.lines.forEach((line, idx) => {
         drawText(idx, line.left, line.top)
     });
     updateBoundingBoxParams()
-    drawOutlineBox()
+    if (shouldDrawOutline) {
+        drawOutlineBox()
+    }
 }
+
+
 
 function changeTextLine(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
