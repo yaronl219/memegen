@@ -2,25 +2,50 @@
 
 var gCanvas;
 var gCtx;
-var gLayers = []
 var gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
+
 
 
 function openHamburgerMenu() {
     const menuContainer = document.querySelector('.mobile-menu')
-        // menuContainer.classList.toggle('hidden')
     menuContainer.classList.toggle('mobile-menu-displayed')
 }
 
 function closeHamburgerMenu() {
     const menuContainer = document.querySelector('.mobile-menu')
     menuContainer.classList.toggle('mobile-menu-displayed')
-        // menuContainer.classList.toggle('hidden')
 
 }
 
+function highlightRelevantNavs(state) {
+    // create an object of all items
+    const elements = {
+            memes: [document.querySelector('.header-link-memes'), document.querySelector('.mobile-nav-memes')],
+            gallery: [document.querySelector('.header-link-gallery'), document.querySelector('.mobile-nav-gallery')],
+            about: [document.querySelector('.header-link-about'), document.querySelector('.mobile-nav-about')]
+        }
+        // collate all keys to an array except for the chosen one
+    let possibleLinks = []
+    for (const key in elements) {
+        if (key !== state) possibleLinks.push(key)
+    }
+    // remove the selected from them
+    possibleLinks.forEach(el => {
+        elements[el].forEach(element => {
+            element.classList.remove('nav-link-selected')
+        })
+    });
+    // highlight the chosen one if exists
+    if (elements[state]) {
+        elements[state].forEach(el => el.classList.add('nav-link-selected'))
+    }
 
-function drawEditBox() {
+}
+
+function onSelectLineDirectly(event) {
+    const xAxis = event.offsetX
+    const yAxis = event.offsetY
+    selectLineDirectly(xAxis, yAxis)
 
 }
 
@@ -56,8 +81,13 @@ function resizeCanvas(width, height) {
 }
 
 function switchToGalleryScreen() {
+    highlightRelevantNavs('gallery')
     renderGalleryScreen()
     populateGallery()
+}
+
+function resetMeme() {
+    gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
 }
 
 function onSwitchLine() {
@@ -73,9 +103,10 @@ function onAddLine() {
 }
 
 function onRemoveLine() {
-    if (!removeLine()) return console.log('cannot delete last row')
+    var newLine = removeLine()
+    if (newLine === false) return console.log('cannot delete last row')
     renderMeme()
-    switchToLineNumber(0)
+    switchToLineNumber(newLine)
     updateTextController()
 }
 
@@ -97,17 +128,18 @@ function onChangeFont() {
     renderMeme()
 }
 
-function editTextLineParameters(clickedButton) {
+function onEditTextLineParameters(clickedButton) {
     changeTextParameters(clickedButton)
     renderMeme()
 }
 
 function startMemeEdit() {
     // create amount of layers equivilent to the amount chose
-    addLayer()
-    switchToLayer(0)
-    var canvas = document.querySelector('.canvas-layer-0')
-
+    // addLayer()
+    // switchToLayer(0)
+    // var canvas = document.querySelector('.canvas-layer-0')
+    highlightRelevantNavs(false)
+    createCanvas()
     document.querySelector('.canvas-container').style.backgroundImage = `url(${getMemeImg(gMeme.selectedImgId)})`
 }
 

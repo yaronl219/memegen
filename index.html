@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEMEGEN</title>
-    <link rel="shortcut icon" href="img/LOGO.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/meme-logo.svg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/button-images.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <!-- <body onload="selectImageAndStartEdit(2)"> -->
 
-<body onload="renderGalleryScreen()">
+<body onload="switchToGalleryScreen()">
     <header>
         <div class="top-header">
             <div class="logo-container">
-                <img src="/img/LOGO.png"> </div>
+                <img src="img/meme-logo.svg"> </div>
             <nav>
                 <div class="nav-menu-container">
                     <ul class="nav-menu">
-                        <li>Memes</li>
-                        <li>Gallery</li>
-                        <li>About</li>
+                        <li class="header-link-memes">Memes</li>
+                        <li class="header-link-gallery nav-link-selected" onclick="switchToGalleryScreen()">Gallery</li>
+                        <li class="header-link-about">About</li>
                     </ul>
 
                 </div>
@@ -48,8 +48,8 @@
             </div>
             <div class="mobile-nav-modal-content">
                 <div class="mobile-nav-link mobile-nav-memes">Memes</div>
-                <div class="mobile-nav-link mobile-nav-gallery">Gallery</div>
-                <div class="mobile-nav-link mobile-nav-About">About</div>
+                <div class="mobile-nav-link mobile-nav-gallery nav-link-selected">Gallery</div>
+                <div class="mobile-nav-link mobile-nav-about">About</div>
             </div>
         </div>
     </modal>

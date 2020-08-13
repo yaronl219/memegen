@@ -1,14 +1,15 @@
 function addLayer() {
     const canvasBase = document.querySelector('.canvas-container')
-    const refCanvas = document.querySelector('.fake-canvas-base')
     const canvasWidth = gCanvasSize.width
     const canvasHeight = gCanvasSize.height
+    const layerNumber = gLayers.length
+    canvasBase.innerHTML += `<canvas class="canvas canvas-layer" width="${canvasWidth}" height="${canvasHeight}"></canvas>`
+        // const refCanvas = document.querySelector('.fake-canvas-base')
         // const canvasLeft = refCanvas.offsetLeft
         // const canvasTop = refCanvas.offsetTop
-    const layerNumber = gLayers.length
     canvasBase.innerHTML += `<canvas class="canvas canvas-layer-${layerNumber}" width="${canvasWidth}" height="${canvasHeight}"></canvas>`
     const newLayer = document.querySelector(`.canvas-layer-${layerNumber}`)
-    gLayers.push(newLayer)
+        // gLayers.push(newLayer)
 }
 
 function switchToLayer(layerNumber) {
