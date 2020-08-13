@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body onload="selectImageAndStartEdit(2)">
+<!-- <body onload="selectImageAndStartEdit(2)"> -->
+
+<body onload="renderGalleryScreen()">
     <header>
         <div class="top-header">
             <div class="logo-container">
@@ -23,8 +25,13 @@
                         <li>Gallery</li>
                         <li>About</li>
                     </ul>
+
                 </div>
+                <button onclick="openHamburgerMenu()" class="hamburger-menu-btn">
+                    ☰
+                </button>
             </nav>
+
         </div>
     </header>
     <main>
@@ -32,8 +39,20 @@
             <div class="canvas-area-container">
 
             </div>
+        </div>
     </main>
-
+    <modal>
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <button class="mobile-menu-close-btn" onclick="closeHamburgerMenu()">✕</button>
+            </div>
+            <div class="mobile-nav-modal-content">
+                <div class="mobile-nav-link mobile-nav-memes">Memes</div>
+                <div class="mobile-nav-link mobile-nav-gallery">Gallery</div>
+                <div class="mobile-nav-link mobile-nav-About">About</div>
+            </div>
+        </div>
+    </modal>
 
 
     <script src="js/utils.js"></script>

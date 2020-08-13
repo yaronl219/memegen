@@ -6,6 +6,20 @@ var gLayers = []
 var gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
 
 
+function openHamburgerMenu() {
+    const menuContainer = document.querySelector('.mobile-menu')
+        // menuContainer.classList.toggle('hidden')
+    menuContainer.classList.toggle('mobile-menu-displayed')
+}
+
+function closeHamburgerMenu() {
+    const menuContainer = document.querySelector('.mobile-menu')
+    menuContainer.classList.toggle('mobile-menu-displayed')
+        // menuContainer.classList.toggle('hidden')
+
+}
+
+
 function drawEditBox() {
 
 }

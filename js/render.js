@@ -61,4 +61,5 @@ function renderGalleryScreen() {
                         <input type="search" class="search-bar-input">
                     </div>
                     <div class="meme-gallery"></div>`
+    populateGallery()
 }
