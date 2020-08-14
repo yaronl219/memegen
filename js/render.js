@@ -9,6 +9,10 @@ const dPad = `
 const hiddenColorInputs = `    <input id="color-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>
 <input id="border-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>`
 
+function switchThroughMobileNav(fn) {
+    closeHamburgerMenu()
+    fn()
+}
 
 function renderMemeEditScreen() {
     const el = document.querySelector('.main-container')
@@ -17,7 +21,7 @@ function renderMemeEditScreen() {
     el.innerHTML = `            <div class="editor-container">
     <div class="canvas-area-container">
     <div class="back-to-gallery">
-    <a onclick="switchToGalleryScreen()">Back To Gallery</a>
+    <a onclick="onGalleryInit()">Back To Gallery</a>
 </div>
         <div class="canvas-container">
 
@@ -63,6 +67,7 @@ function renderMemeEditScreen() {
         </div>
         <div class="sticker-container"></div>
         <div class="share-features-container">
+        <a class="save-btn" onclick="onSaveMeme(this)">Save</a>
         <a class="download-btn" onclick="onDownload(this)">Download</a>
         <a class="share-btn" onclick="onShare()">Share</a>
     </div>

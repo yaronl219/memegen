@@ -34,7 +34,7 @@ function resetLines() {
         align: 'center',
         textColor: 'white',
         borderColor: 'black',
-        fontFamily: 'Impact',
+        fontFamily: 'Custom-Impact',
         top: 100,
         left: 250,
         boundingBox: {
@@ -111,7 +111,7 @@ function createLine() {
         align: 'center',
         textColor: 'white',
         borderColor: 'black',
-        fontFamily: 'Impact',
+        fontFamily: 'Custom-Impact',
         top: newLineTop,
         left: Math.round(canvasWidth / 2),
         boundingBox: {
@@ -139,7 +139,7 @@ function changeTextBorderColor(color) {
 }
 
 function changeLineFont(font) {
-    console.log(font)
+
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
 }
 
@@ -176,7 +176,7 @@ function switchToNextLine() {
 }
 
 
-function drawImgFromlocal(shouldDownload = false) {
+function drawImgFromlocal(shouldDownload = false, ) {
     var img = new Image()
     img.crossOrigin = 'anonymous'
     img.src = getMemeImg(gMeme.selectedImgId)
@@ -186,6 +186,7 @@ function drawImgFromlocal(shouldDownload = false) {
         if (shouldDownload) { downloadMeme() }
     }
 }
+
 
 function downloadMeme() {
     const download = gCanvas.toDataURL('image/png')

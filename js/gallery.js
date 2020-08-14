@@ -1,10 +1,19 @@
+'use strict'
+
+function onGalleryInit() {
+    highlightRelevantNavs('gallery')
+    renderGalleryScreen()
+    populateGallery(gImgs)
+}
+
 function populateGallery(arr) {
     const galleryEl = document.querySelector('.meme-gallery')
-    strHtml = ''
+    var strHtml = '<ul class=img-wrapper>'
     arr.forEach(image => {
         // strHtml += `<div class="gallery-image" style="background-image: url("${image.url}");"></div>`
-        strHtml += `<img class="gallery-image" src="${image.url}" onclick="selectImageAndStartEdit(${image.id})" />`
+        strHtml += `<li><img class="gallery-image" src="${image.url}" onclick="selectImageAndStartEdit(${image.id})" /></li>`
     })
+    strHtml += '</ul>'
     galleryEl.innerHTML = strHtml
 }
 
@@ -31,8 +40,10 @@ function selectImageAndStartEdit(imgId) {
     resetLines()
     resetMeme()
     startMemeEdit()
+    changeLineFont('Custom-Impact')
     getAspectRatio(imgId)
     checkWindowWidth()
+
 }
 
 function onSearchInput(el) {

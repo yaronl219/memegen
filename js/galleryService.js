@@ -16,7 +16,6 @@ function calculateAspectRatio(imgId) {
     const img = new Image()
     img.src = selectedMeme.url
     return { imgWidth: img.width, imgHeight: img.height }
-
 }
 
 var gImgs = [{

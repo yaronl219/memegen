@@ -1,11 +1,10 @@
-function makeID(array, id) {
-    var highestId = 0
-    for (const id in array) {
-        if (id > highestId) {
-            highestId = id
-        }
+function makeId(length = 5) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-    return highestId
+    return txt;
 }
 
 function getIdxById(id, arr) {

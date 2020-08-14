@@ -21,8 +21,8 @@
             <nav>
                 <div class="nav-menu-container">
                     <ul class="nav-menu">
-                        <li class="header-link-memes">Memes</li>
-                        <li class="header-link-gallery nav-link-selected" onclick="switchToGalleryScreen()">Gallery</li>
+                        <li class="header-link-memes" onclick="savedMemesScreenInit()">Memes</li>
+                        <li class="header-link-gallery nav-link-selected" onclick="onGalleryInit()">Gallery</li>
                         <li class="header-link-about">About</li>
                     </ul>
 
@@ -50,8 +50,8 @@
                 <button class="mobile-menu-close-btn" onclick="closeHamburgerMenu()">✕</button>
             </div>
             <div class="mobile-nav-modal-content">
-                <div class="mobile-nav-link mobile-nav-memes">Memes</div>
-                <div class="mobile-nav-link mobile-nav-gallery nav-link-selected" onclick="switchThroughMobileNav(switchToGalleryScreen)">Gallery</div>
+                <div class="mobile-nav-link mobile-nav-memes" onclick="switchThroughMobileNav(savedMemesScreenInit)">Memes</div>
+                <div class="mobile-nav-link mobile-nav-gallery nav-link-selected" onclick="switchThroughMobileNav(onGalleryInit)">Gallery</div>
                 <div class="mobile-nav-link mobile-nav-about">About</div>
             </div>
         </div>
@@ -61,13 +61,16 @@
     </modal>
     <modal class="color-pallete-container hidden"></modal>
 
-    <script src=" js/utils.js "></script>
-    <script src="js/layers.js "></script>
-    <script src="js/render.js "></script>
-    <script src="js/service.js "></script>
-    <script src="js/galleryService.js "></script>
-    <script src="js/gallery.js "></script>
-    <script src="js/controller.js "></script>
+    <script src="js/storage-service.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/layers.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/galleryService.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/myMemeService.js"></script>
+    <script src="js/myMemeController.js"></script>
+    <script src="js/controller.js"></script>
 </body>
 
 </html>

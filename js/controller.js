@@ -11,12 +11,13 @@ var gTouchCoords;
 
 function init() {
     toggleEventListeners(true)
-    switchToGalleryScreen()
+    onGalleryInit()
 }
 
-function switchThroughMobileNav(fn) {
-    closeHamburgerMenu()
-    fn()
+function onSaveMeme() {
+    saveMemeToStorage()
+    setTimeout(() => savedMemesScreenInit(), 100)
+
 }
 
 function onTouchStartAndEnd(ev, isTouchStart) {
@@ -90,27 +91,23 @@ function closeHamburgerMenu() {
 }
 
 function highlightRelevantNavs(state) {
+    // remove the selected class from the previously selected ones
+    const elToUnselect = document.querySelectorAll('.nav-link-selected')
+    elToUnselect.forEach(el => el.classList.remove('nav-link-selected'))
+
     // create an object of all items
     const elements = {
-            memes: [document.querySelector('.header-link-memes'), document.querySelector('.mobile-nav-memes')],
-            gallery: [document.querySelector('.header-link-gallery'), document.querySelector('.mobile-nav-gallery')],
-            about: [document.querySelector('.header-link-about'), document.querySelector('.mobile-nav-about')]
-        }
-        // collate all keys to an array except for the chosen one
-    let possibleLinks = []
-    for (const key in elements) {
-        if (key !== state) possibleLinks.push(key)
+        memes: [document.querySelector('.header-link-memes'), document.querySelector('.mobile-nav-memes')],
+        gallery: [document.querySelector('.header-link-gallery'), document.querySelector('.mobile-nav-gallery')],
+        about: [document.querySelector('.header-link-about'), document.querySelector('.mobile-nav-about')]
     }
-    // remove the selected from them
-    possibleLinks.forEach(el => {
-        elements[el].forEach(element => {
-            element.classList.remove('nav-link-selected')
-        })
-    });
-    // highlight the chosen one if exists
-    if (elements[state]) {
-        elements[state].forEach(el => el.classList.add('nav-link-selected'))
-    }
+
+    // if state was found in the elements object
+    if (!elements[state]) return
+        // add the selected class
+    elements[state].forEach(el => el.classList.add('nav-link-selected'))
+
+
 
 }
 
@@ -120,8 +117,10 @@ function onWindowClick(event) {
         document.querySelector('.hidden-text-line').focus()
         onSelectLineDirectly(event)
     } else {
-        drawEditMarker(false)
-        renderMeme(false, false)
+        if (gCanvas) {
+            drawEditMarker(false)
+            renderMeme(false, false)
+        }
     }
 }
 
@@ -166,12 +165,11 @@ function resizeCanvas(width, height) {
     getMemeLines()
 }
 
-function switchToGalleryScreen() {
-    highlightRelevantNavs('gallery')
-    renderGalleryScreen()
-    populateGallery(gImgs)
-}
 
+function switchToSavedMemesScreen() {
+    highlightRelevantNavs('memes')
+    savedMemesScreenInit()
+}
 
 function onSwitchLine() {
     switchToNextLine()
