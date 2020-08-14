@@ -29,7 +29,7 @@ function renderSavedMemes(memeObject) {
 function renderMemeScreenEmptyState() {
     const el = document.querySelector('.main-container')
     el.innerHTML = `<div class="empty-state-container">
-                        <h1>WHY U HAVE NO MEMES</h1>
+                        <img src="img/whyuno.png" />
                         <a onclick="onGalleryInit()">Go create some now</a>
                     </div>`
 }

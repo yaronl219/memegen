@@ -421,13 +421,13 @@ main {
 .empty-state-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     height: 85vh;
 }
 
-.empty-state-container h1 {
-    font-family: 'Custom-Impact';
+.empty-state-container img {
+    width: 350px;
 }
 
 .empty-state-container a {
@@ -437,6 +437,45 @@ main {
 
 .empty-state-container a:hover {
     color: #FF9826
+}
+
+.about-container {
+    background-image: url('../img/its-something.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 93vh;
+    text-align: center;
+    padding: 1rem;
+    cursor: default;
+}
+
+.about-header span:hover {
+    color: #FF9826;
+    transition: 0.2s;
+}
+
+.something-title {
+    position: absolute;
+    bottom: 0px;
+}
+
+.something-title h6 {
+    font-size: 2.5rem;
+    font-family: 'Arial';
+    color: black;
+}
+
+.flashing-notice-modal {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    padding: 1rem;
+    border-radius: 10px;
+    position: fixed;
+    top: 65px;
+    opacity: 90%;
 }
 
 @supports (-webkit-text-stroke: 1px black) {
@@ -537,5 +576,17 @@ main {
         line-height: 1.75rem;
         font-weight: 300;
         cursor: pointer;
+    }
+    .remove-meme {
+        display: block;
+    }
+    .share-features-container {
+        padding: 0.5rem;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+    .share-features-container a {
+        padding: 0.5rem 1rem;
+        margin: 0px;
     }
 }

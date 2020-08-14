@@ -14,6 +14,32 @@ function switchThroughMobileNav(fn) {
     fn()
 }
 
+
+function aboutScreenInit() {
+    highlightRelevantNavs('about')
+    renderAboutScreen()
+}
+
+function renderAboutScreen() {
+    const header = 'Proudly Built By Yaron Lipshitz'
+    const headerChars = header.split('')
+
+    var strHtml = `<div class="about-container">
+                        <div>
+                        <h1 class="about-header">`
+    headerChars.forEach(letter => strHtml += `<span>${letter}</span>`)
+    strHtml += `</h1>
+            </div>
+            <div class="something-title">
+                <h6>It's something</h6>
+            </div>
+        </div>`
+    const el = document.querySelector('.main-container')
+    el.innerHTML = strHtml
+}
+
+
+
 function renderMemeEditScreen() {
     const el = document.querySelector('.main-container')
         // currently toggled off - can be later added

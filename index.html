@@ -23,7 +23,7 @@
                     <ul class="nav-menu">
                         <li class="header-link-memes" onclick="savedMemesScreenInit()">Memes</li>
                         <li class="header-link-gallery nav-link-selected" onclick="onGalleryInit()">Gallery</li>
-                        <li class="header-link-about">About</li>
+                        <li class="header-link-about" onclick="aboutScreenInit()">About</li>
                     </ul>
 
                 </div>
@@ -52,13 +52,11 @@
             <div class="mobile-nav-modal-content">
                 <div class="mobile-nav-link mobile-nav-memes" onclick="switchThroughMobileNav(savedMemesScreenInit)">Memes</div>
                 <div class="mobile-nav-link mobile-nav-gallery nav-link-selected" onclick="switchThroughMobileNav(onGalleryInit)">Gallery</div>
-                <div class="mobile-nav-link mobile-nav-about">About</div>
+                <div class="mobile-nav-link mobile-nav-about " onclick="switchThroughMobileNav(aboutScreenInit)">About</div>
             </div>
         </div>
     </modal>
-    <modal class="flashing-notice-modal">
-
-    </modal>
+    <modal class="flashing-notice-modal hidden"></modal>
     <modal class="color-pallete-container hidden"></modal>
 
     <script src="js/storage-service.js"></script>

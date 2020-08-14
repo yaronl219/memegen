@@ -50,8 +50,26 @@ function dragImage(x, y, clientX, clientY) {
     var selectedLine = isClickedPixelLine(clientX, clientY)
     if (selectedLine === false) return
     switchToLineNumber(selectedLine)
-    gMeme.lines[gMeme.selectedLineIdx].top += y
-    gMeme.lines[gMeme.selectedLineIdx].left += x
+    if (!checkIfDragOutOfBounds(x, y, selectedLine)) {
+        gMeme.lines[selectedLine].top += y
+        gMeme.lines[selectedLine].left += x
+    }
+
+}
+
+function checkIfDragOutOfBounds(x, y, selectedLine) {
+    // checks if target is out of bounds and returns true if out
+    const newXCoords = gMeme.lines[selectedLine].left + x
+    const newYCoords = gMeme.lines[selectedLine].top + y
+    const boundingBox = gMeme.lines[selectedLine].boundingBox
+    if (newXCoords - (boundingBox.width / 2) < 0 ||
+        newYCoords - (boundingBox.height / 2) < 0 ||
+        newXCoords + (boundingBox.width / 2) > gCanvas.width ||
+        newYCoords + (boundingBox.height / 2) > gCanvas.height) {
+        return true
+    }
+
+    return false
 }
 
 function getTextEditParams() {
@@ -139,11 +157,11 @@ function changeTextBorderColor(color) {
 }
 
 function changeLineFont(font) {
-
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
 }
 
 function isClickedPixelLine(x, y) {
+    // checks if the click pixel has a line in it
     for (var i = gMeme.lines.length - 1; i >= 0; i--) {
         const boundingBox = gMeme.lines[i].boundingBox
         if (boundingBox.left <= x && boundingBox.top <= y && boundingBox.left + boundingBox.width >= x && boundingBox.top + boundingBox.height >= y) {

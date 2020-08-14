@@ -20,6 +20,41 @@ function onSaveMeme() {
 
 }
 
+function displayWarning(txt, transitionTime = 300, timeToDisplay = 3000) {
+    const warningEl = document.querySelector('.flashing-notice-modal')
+    warningEl.innerText = txt
+    warningEl.classList.toggle('hidden')
+    var elOpacity = 0
+
+    // fade in
+    var opacityInterval = setInterval(() => {
+        warningEl.style.opacity = `${elOpacity}%`
+        elOpacity += 90 / 20
+    }, transitionTime / 20);
+
+    // stop fade in
+    setTimeout(() => {
+        clearInterval(opacityInterval)
+    }, transitionTime);
+
+    setTimeout(() => {
+        // fade out
+        var opacityInterval = setInterval(() => {
+            warningEl.style.opacity = `${elOpacity}%`
+            elOpacity -= 90 / 20
+        }, transitionTime / 20);
+
+        // stop fade out
+        setTimeout(() => {
+            clearInterval(opacityInterval)
+                // rehide the element
+            warningEl.classList.toggle('hidden')
+        }, transitionTime);
+
+    }, timeToDisplay + transitionTime);
+}
+
+
 function onTouchStartAndEnd(ev, isTouchStart) {
     if (isTouchStart && ev.target === gCanvas) {
         gTouchCoords = { x: ev.changedTouches[0].clientX, y: ev.changedTouches[0].clientY }
@@ -65,7 +100,7 @@ function drawEditMarker(shouldStart) {
             displayMarker.style.fontSize = `${displayMarkerParams.fontSize *1.4}px`
             displayMarker.style.top = `${displayMarkerParams.yCoord + canvasLocation.offsetTop }px`
             displayMarker.style.left = `${displayMarkerParams.xCoord+ canvasLocation.offsetLeft - 15}px`
-        }, 50);
+        }, 10);
         gTimeInterval.reposition = setInterval(() => {
             displayMarker.classList.toggle('hidden')
         }, 500)
@@ -197,7 +232,7 @@ function onAddLine() {
 
 function onRemoveLine() {
     var newLine = removeLine()
-    if (newLine === false) return console.log('cannot delete last row')
+    if (newLine === false) return displayWarning('Sorry, you cannot remove the last line', 250, 2000)
     switchToLineNumber(newLine)
     renderMeme()
     updateTextController()
