@@ -11,7 +11,7 @@ var gMeme = {
         align: 'center',
         textColor: 'white',
         borderColor: 'black',
-        fontFamily: 'Impact',
+        fontFamily: 'Custom-Impact',
         top: 100,
         left: 250,
         boundingBox: {
@@ -139,6 +139,7 @@ function changeTextBorderColor(color) {
 }
 
 function changeLineFont(font) {
+    console.log(font)
     gMeme.lines[gMeme.selectedLineIdx].fontFamily = font
 }
 
@@ -190,11 +191,10 @@ function downloadMeme() {
     const download = gCanvas.toDataURL('image/png')
     let elLink = document.createElement('a')
     elLink.href = download
-    elLink.download = "canvas.png"
+    elLink.download = "my meme.png"
     document.body.appendChild(elLink)
     elLink.click()
     document.body.removeChild(elLink)
-
 }
 
 function changeTextParameters(param) {

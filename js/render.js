@@ -1,16 +1,18 @@
+const dPad = `
+<div class="text-directional-change-location">
+<button class="text-edit-btn btn-up" label="up" onclick="onEditTextLineParameters('up')"></button>
+<button class="text-edit-btn btn-down" label="down" onclick="onEditTextLineParameters('down')"></button>
+<button class="text-edit-btn btn-left" label="left" onclick="onEditTextLineParameters('left')"></button>
+<button class="text-edit-btn btn-right" label="right" onclick="onEditTextLineParameters('right')"></button>
+</div>
+`
+const hiddenColorInputs = `    <input id="color-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>
+<input id="border-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>`
+
+
 function renderMemeEditScreen() {
     const el = document.querySelector('.main-container')
         // currently toggled off - can be later added
-    const dPad = `
-    <div class="text-directional-change-location">
-    <button class="text-edit-btn btn-up" label="up" onclick="onEditTextLineParameters('up')"></button>
-    <button class="text-edit-btn btn-down" label="down" onclick="onEditTextLineParameters('down')"></button>
-    <button class="text-edit-btn btn-left" label="left" onclick="onEditTextLineParameters('left')"></button>
-    <button class="text-edit-btn btn-right" label="right" onclick="onEditTextLineParameters('right')"></button>
-    </div>
-    `
-    const hiddenColorInputs = `    <input id="color-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>
-    <input id="border-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>`
 
     el.innerHTML = `            <div class="editor-container">
     <div class="canvas-area-container">
@@ -35,7 +37,7 @@ function renderMemeEditScreen() {
         <div class="text-editor-container">
             <div class="text-params">
                 <select class="text-edit-btn select-dropdown" label="font selection" oninput="onChangeFont()">
-                    <option value="Impact">Impact</option>
+                    <option value="Custom-Impact">Impact</option>
                     <option value="Roboto">Roboto</option>
                     <option value="Arial">Arial</option>
                 </select>

@@ -189,17 +189,6 @@ function onChangeColor(el, kind, color) {
 }
 
 
-// function onChangeFontColor(el) {
-//     console.log(el.id)
-//     if (el.id === 'color-choice') {
-//         changeTextColor(el.value)
-//     } else {
-//         changeTextBorderColor(el.value)
-//     }
-//     renderMeme()
-
-// }
-
 
 function onAddLine() {
     const newLineIdx = createLine()
@@ -222,10 +211,7 @@ function updateTextController() {
     const currLine = lineObj.currLine
     const totalLines = lineObj.totalLines
     layerCounter.innerHTML = `<span class="chosen-line">${currLine+1}</span><span>/${totalLines}</span>`
-
-    // const textInputField = document.querySelector('.textline-edit-input')
     const currLineText = lineObj.txt
-        // textInputField.value = currLineText
     updateTextInputsValue(currLineText)
 }
 
@@ -241,10 +227,6 @@ function onEditTextLineParameters(clickedButton) {
 }
 
 function startMemeEdit() {
-    // create amount of layers equivilent to the amount chose
-    // addLayer()
-    // switchToLayer(0)
-    // var canvas = document.querySelector('.canvas-layer-0')
     highlightRelevantNavs(false)
     createCanvas()
     document.querySelector('.canvas-container').style.backgroundImage = `url(${getMemeImg(gMeme.selectedImgId)})`
@@ -267,7 +249,6 @@ function setTextLine(el) {
 
 
 function updateTextInputsValue(txt) {
-    // TODO: to update also in updateTextController()
     const textInputs = document.querySelectorAll('.textline-edit-input')
     textInputs.forEach(input => input.value = txt)
 }

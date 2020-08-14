@@ -17,8 +17,6 @@ function getAspectRatio(imgId) {
     gCanvasSize.defaultHeight = newHeight
     gCanvasSize.width = newWidth
     gCanvasSize.height = newHeight
-
-    console.log(newWidth, newHeight)
     const resizeBy = (window.innerWidth < 650) ? 0.7 : 1
     resizeCanvas(newWidth * resizeBy, newHeight * resizeBy)
     repositionOnResize(1, (newHeight * resizeBy / 500))
@@ -33,7 +31,6 @@ function selectImageAndStartEdit(imgId) {
     resetLines()
     resetMeme()
     startMemeEdit()
-        // renderMeme()
     getAspectRatio(imgId)
     checkWindowWidth()
 }

@@ -1,7 +1,9 @@
+/* general */
+
 * {
     box-sizing: border-box;
     color: #989898;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'roboto', sans-serif;
     background-position: center;
     background-repeat: no-repeat;
     transition: 0.3;
@@ -31,6 +33,14 @@ main {
 
 button {
     cursor: pointer;
+}
+
+
+/*  fonts */
+
+@font-face {
+    font-family: "Custom-Impact";
+    src: url("../fonts/impact.ttf");
 }
 
 .logo-container {
@@ -229,6 +239,7 @@ main {
     width: 0px;
     height: 0px;
     opacity: 0%;
+    font-family: 'Custom-Impact';
 }
 
 .textline-edit-input:focus {
@@ -358,6 +369,7 @@ main {
 
 .color-choice {
     border-radius: 5px;
+    border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 
 .color-choice:hover {
