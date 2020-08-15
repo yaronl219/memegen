@@ -14,7 +14,7 @@ function uploadImg(elForm) {
     // A function to be called if request succeeds
     function onSuccess(uploadedImgUrl) {
         uploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}`)
+        window.open(`www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}`)
     }
     doUploadImg(elForm, onSuccess);
 }
@@ -25,7 +25,7 @@ function uploadImg(elForm) {
 
 function doUploadImg(elForm, onSuccess) {
     var formData = new FormData(elForm);
-    fetch('http://ca-upload.com/here/upload.php', {
+    fetch('ca-upload.com/here/upload.php', {
             method: 'POST',
             body: formData
         })
