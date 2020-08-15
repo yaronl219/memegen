@@ -17,7 +17,7 @@ function onRemoveMeme(id) {
 
 function renderSavedMemes(memeObject) {
     const el = document.querySelector('.main-container')
-    var strHtml = '<div class="meme-gallery"><ul class=img-wrapper>'
+    var strHtml = '<div class="meme-gallery"><ul class="saved-memes-img-wrapper">'
     for (const key in memeObject) {
         strHtml += `<li class="saved-meme-list-item"><img class="gallery-image" src="${memeObject[key].coverImage}" onclick="selectSavedMemeAndStartEditing('${key}')" /><div class="remove-meme" onclick="onRemoveMeme('${key}')">✕</div></li>`
             // console.log(memeObject[key].coverImage)
