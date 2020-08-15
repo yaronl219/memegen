@@ -69,10 +69,14 @@ function renderKeywords(keyword) {
 function populateGallery(arr) {
     const galleryEl = document.querySelector('.meme-gallery')
     var strHtml = '<ul class=img-wrapper>'
-    arr.forEach(image => {
-        // strHtml += `<div class="gallery-image" style="background-image: url("${image.url}");"></div>`
-        strHtml += `<li><img class="gallery-image" src="${image.url}" onclick="selectImageAndStartEdit(${image.id})" /></li>`
-    })
+    if (arr.length > 0) {
+        arr.forEach(image => {
+            strHtml += `<li><img class="gallery-image" src="${image.url}" onclick="selectImageAndStartEdit(${image.id})" /></li>`
+        })
+    } else {
+        // if there are no memes found - render an image as empty screen
+        strHtml += '<div class="empty-gallery-screen-container"><h3>No memes here...</h3><img src="img/backtothefuture.png"></div>'
+    }
     strHtml += '</ul>'
     galleryEl.innerHTML = strHtml
 }

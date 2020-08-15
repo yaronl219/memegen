@@ -6,7 +6,6 @@ function renderAndUploadImg(elForm, ev) {
     }, 1000)
 }
 
-
 function uploadImg(elForm) {
 
     document.getElementById('imgData').value = gCanvas.toDataURL("image/jpeg");
@@ -18,10 +17,6 @@ function uploadImg(elForm) {
     }
     doUploadImg(elForm, onSuccess);
 }
-
-
-
-
 
 function doUploadImg(elForm, onSuccess) {
     var formData = new FormData(elForm);
