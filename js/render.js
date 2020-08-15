@@ -95,7 +95,12 @@ function renderMemeEditScreen() {
         <div class="share-features-container">
         <a class="save-btn" onclick="onSaveMeme(this)">Save</a>
         <a class="download-btn" onclick="onDownload(this)">Download</a>
-        <a class="share-btn" onclick="onShare()">Share</a>
+        <form class="flex space-between column"action="" method="POST" enctype="multipart/form-data" onsubmit="renderAndUploadImg(this, event)">
+        <input name="img" id="imgData" type="hidden" />
+        <button class="btn share-btn" type="submit">Share</button>
+        <div class="share-container"></div>
+    </form>
+        
     </div>
     <input class="textline-edit-input hidden-text-line" type="text" oninput="setTextLine(this)"></input>
 

@@ -400,6 +400,7 @@ main {
     align-items: center;
 }
 
+.share-btn,
 .share-features-container a {
     background-color: #FF9826;
     border: 1px solid #ff9826;
@@ -410,6 +411,7 @@ main {
     cursor: pointer;
 }
 
+.share-btn,
 .share-features-container a:hover {
     background-color: #eca14a;
     transition: 0.2s;
@@ -576,7 +578,7 @@ main {
     .mobile-menu-close-btn {
         color: white;
         position: relative;
-        z-index: 3;
+        z-index: 4;
     }
     .canvas-container {
         margin: 2rem 0rem;
@@ -626,6 +628,8 @@ main {
     .mobile-menu-header {
         display: flex;
         height: 3rem;
+        position: relative;
+        z-index: 3;
         padding: 1rem;
         justify-content: flex-end;
     }
@@ -651,6 +655,7 @@ main {
         width: 100%;
         justify-content: space-evenly;
     }
+    .share-btn,
     .share-features-container a {
         padding: 0.5rem 1rem;
         margin: 0px;
