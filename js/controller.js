@@ -20,39 +20,13 @@ function onSaveMeme() {
 
 }
 
-function displayWarning(txt, transitionTime = 300, timeToDisplay = 3000) {
+function displayWarning(txt) {
     const warningEl = document.querySelector('.flashing-notice-modal')
     warningEl.innerText = txt
-    warningEl.classList.toggle('hidden')
-    var elOpacity = 0
+    fadeInOutAnimation(warningEl, 300, 3000, 90)
 
-    // fade in
-    var opacityInterval = setInterval(() => {
-        warningEl.style.opacity = `${elOpacity}%`
-        elOpacity += 90 / 20
-    }, transitionTime / 20);
-
-    // stop fade in
-    setTimeout(() => {
-        clearInterval(opacityInterval)
-    }, transitionTime);
-
-    setTimeout(() => {
-        // fade out
-        var opacityInterval = setInterval(() => {
-            warningEl.style.opacity = `${elOpacity}%`
-            elOpacity -= 90 / 20
-        }, transitionTime / 20);
-
-        // stop fade out
-        setTimeout(() => {
-            clearInterval(opacityInterval)
-                // rehide the element
-            warningEl.classList.toggle('hidden')
-        }, transitionTime);
-
-    }, timeToDisplay + transitionTime);
 }
+
 
 
 function onTouchStartAndEnd(ev, isTouchStart) {

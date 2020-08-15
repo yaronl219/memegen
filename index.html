@@ -16,7 +16,7 @@
 <body onload="init()">
     <header>
         <div class="top-header">
-            <div class="logo-container">
+            <div class="logo-container" onclick="onGalleryInit()">
                 <img src="img/meme-logo.svg"> </div>
             <nav>
                 <div class="nav-menu-container">
@@ -51,7 +51,9 @@
             </div>
             <div class="mobile-nav-modal-content">
                 <div class="mobile-nav-link mobile-nav-memes" onclick="switchThroughMobileNav(savedMemesScreenInit)">Memes</div>
+                <div class="mobile-nav-line-break"></div>
                 <div class="mobile-nav-link mobile-nav-gallery nav-link-selected" onclick="switchThroughMobileNav(onGalleryInit)">Gallery</div>
+                <div class="mobile-nav-line-break"></div>
                 <div class="mobile-nav-link mobile-nav-about " onclick="switchThroughMobileNav(aboutScreenInit)">About</div>
             </div>
         </div>

@@ -1,5 +1,73 @@
 'use strict'
 
+var gKeywords = []
+
+function selectKeyword(keyword) {
+    // find the item index
+    const selectedObj = gKeywords.find((item) => {
+            return item.keyword === keyword
+        })
+        // add one to the times it was selected
+    selectedObj.timesSelected += 1
+        // save it to storage
+    saveKeywordsToStorage()
+}
+
+function sortKeywords() {
+    // sort gKeyword array in descending order
+    gKeywords.sort((a, b) => ((a.timesSelected - b.timesSelected) * -1))
+
+}
+
+function getKeywordsToDisplay(amount = 5, currentKeyword = '') {
+    sortKeywords()
+        // return the amount of words chosen
+    var relevantKeywords;
+    if (!currentKeyword) {
+        relevantKeywords = gKeywords
+    } else {
+        relevantKeywords = gKeywords.filter((key) => {
+            if (key.keyword.includes(currentKeyword)) {
+                return key
+            }
+        })
+    }
+    let keywords = []
+    for (let i = 0; i < amount; i++) {
+        if (i === relevantKeywords.length) break
+        keywords.push(relevantKeywords[i])
+    }
+
+    return keywords
+}
+
+function loadKeywords() {
+    const keywords = loadFromStorage('memeKeywords')
+    if (!keywords) {
+        gKeywords = createKeywords()
+    } else {
+        gKeywords = keywords
+    }
+}
+
+function createKeywords() {
+    // populate the gKeywords with all keywords
+    let keywords = []
+    gImgs.forEach(img => {
+        img.keywords.forEach(word => {
+            // if the word does not already exist in the keywords, add it.
+            if (!keywords.find(({ keyword }) => keyword === word)) {
+                keywords.push({ keyword: word, timesSelected: 1 })
+            }
+        })
+    });
+    return keywords
+}
+
+function saveKeywordsToStorage() {
+    saveToStorage('memeKeywords', gKeywords)
+}
+
 function filterByKeword(keyword) {
     var filteredImages = []
     gImgs.forEach(image => {

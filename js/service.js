@@ -1,13 +1,12 @@
 'use strict'
 
-var gKeywords = {}
 
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [{
         txt: 'I\'m a text placeholder',
-        size: 40,
+        size: 46,
         align: 'center',
         textColor: 'white',
         borderColor: 'black',
@@ -30,7 +29,7 @@ function resetMeme() {
 function resetLines() {
     gMeme.lines = [{
         txt: 'I\'m a text placeholder',
-        size: 40,
+        size: 46,
         align: 'center',
         textColor: 'white',
         borderColor: 'black',

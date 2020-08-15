@@ -28,7 +28,7 @@ header {
 }
 
 main {
-    padding-top: 65px;
+    padding-top: 55px;
 }
 
 button {
@@ -46,6 +46,7 @@ button {
 .logo-container {
     width: 9.5rem;
     height: 2rem;
+    cursor: pointer;
 }
 
 .top-header {
@@ -95,7 +96,7 @@ main {
 .meme-gallery {
     width: 100%;
     max-height: 100vh;
-    padding: 10px 20px;
+    padding: 50px 20px;
 }
 
 .img-wrapper {
@@ -147,17 +148,51 @@ main {
 
 .search-bar-container {
     display: flex;
-    padding: 10px;
-    height: 3rem;
+    padding: 10px 10px;
+    min-height: 3rem;
+    flex-wrap: wrap;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    margin-top: -10px;
 }
 
 .search-bar-input {
     border-radius: 80px;
-    width: 100%;
+    flex-grow: 2;
     height: 3rem;
-    font-size: 2rem;
+    font-size: 1.2rem;
     padding: 0.2rem 1rem 0.2rem 3rem;
     color: black;
+    min-width: 350px;
+}
+
+.keywords-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    line-height: 3rem;
+    /* height: 3rem; */
+}
+
+.keywords-container div {
+    padding: 0px 0.5rem;
+}
+
+.keyword {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.selected-keyword {
+    color: #FF9826;
+}
+
+.keywords-container div:hover {
+    color: #FF9826;
+    cursor: pointer;
 }
 
 .gallery-image {
@@ -505,8 +540,16 @@ main {
         color: white;
         font-weight: 500 !important;
     }
+    .mobile-nav-line-break {
+        width: 21px;
+        height: 1px;
+        background-color: white;
+    }
     .search-bar-container {
-        margin-top: 20px;
+        margin-top: 12px;
+    }
+    .search-bar-input {
+        width: 100%;
     }
     .mobile-menu-close-btn,
     .hamburger-menu-btn {
@@ -519,6 +562,8 @@ main {
     }
     .mobile-menu-close-btn {
         color: white;
+        position: relative;
+        z-index: 2;
     }
     .canvas-container {
         margin: 2rem 0rem;
@@ -526,6 +571,7 @@ main {
     .top-header {
         padding: 0px 20px;
         align-items: center;
+        z-index: 1;
     }
     .color-pallete-container {
         top: 0px;
@@ -551,6 +597,10 @@ main {
     }
     .meme-gallery {
         padding: 10px;
+        margin-top: 7rem;
+    }
+    .keywords-container {
+        width: 100%;
     }
     .mobile-menu-displayed {
         transform: translate(0px);
