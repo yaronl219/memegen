@@ -3,6 +3,19 @@
 var gKeywords = []
 var gImgs;
 
+function addImageToGallery(imgUrl) {
+    const newImgId = getHighestId('id', gImgs) + 1
+    const newImg = { id: newImgId, url: imgUrl, keywords: ['user generated'] }
+    gImgs.push(newImg)
+    saveImgsToStorage()
+
+    setTimeout(() => {
+        onGalleryInit()
+    }, 500)
+
+}
+
+
 function selectKeyword(keyword) {
     // find the item index
     const selectedObj = gKeywords.find((item) => {
@@ -92,7 +105,12 @@ function saveImgsToStorage() {
 }
 
 function loadImgsFromStorage() {
-    gImgs = createImgs()
+    const imgsInStorage = loadFromStorage('memeGallery')
+    if (!imgsInStorage) {
+        gImgs = createImgs()
+    } else {
+        gImgs = imgsInStorage
+    }
 }
 
 function createImgs() {

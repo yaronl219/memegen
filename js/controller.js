@@ -24,6 +24,10 @@ function onShareMeme(elForm, ev) {
     }, 2000)
 }
 
+function onImgUploadClicked() {
+    document.querySelector('.file-input').click()
+}
+
 function onSaveMeme() {
     saveMemeToStorage()
     setTimeout(() => savedMemesScreenInit(), 100)
@@ -64,6 +68,7 @@ function onMouseDrag(ev) {
     }
 }
 
+
 function drawEditMarker(shouldStart) {
     const displayMarker = document.querySelector('.canvas-place-marker')
     const canvasLocation = document.querySelector('.canvas')
@@ -82,8 +87,9 @@ function drawEditMarker(shouldStart) {
             displayMarker.style.fontSize = `${displayMarkerParams.fontSize *1.4}px`
             displayMarker.style.top = `${displayMarkerParams.yCoord + canvasLocation.offsetTop }px`
             displayMarker.style.left = `${displayMarkerParams.xCoord+ canvasLocation.offsetLeft - 15}px`
+            hideEditMarkerIfOutOfBounds()
         }, 10);
-        gTimeInterval.reposition = setInterval(() => {
+        gTimeInterval.blink = setInterval(() => {
             displayMarker.classList.toggle('hidden')
         }, 500)
     }

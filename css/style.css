@@ -438,7 +438,7 @@ main {
 }
 
 .canvas-place-marker {
-    position: fixed;
+    position: absolute;
     top: 100px;
     left: 100px;
     color: black;

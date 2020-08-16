@@ -36,17 +36,20 @@ function doUploadImg(elForm, onSuccess) {
 
 // The next 2 functions handle IMAGE UPLOADING to img tag from file system: 
 function onImgInput(ev) {
-    loadImageFromInput(ev, renderCanvas)
+    loadImageFromInput(ev)
 }
 
 function loadImageFromInput(ev, onImageReady) {
-    document.querySelector('.share-container').innerHTML = ''
+    // document.querySelector('.share-container').innerHTML = ''
     var reader = new FileReader();
 
     reader.onload = function(event) {
         var img = new Image();
-        img.onload = onImageReady.bind(null, img)
+        // img.onload = onImageReady.bind(null, img)
         img.src = event.target.result;
+        const imgData = img.src
+        addImageToGallery(imgData)
+
     }
     reader.readAsDataURL(ev.target.files[0]);
 }

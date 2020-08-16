@@ -13,6 +13,15 @@ function getIdxById(id, arr) {
     })
 }
 
+function getHighestId(id, arr) {
+    // if an array of objects contains a serial id, this finds the highest one
+    var highestId = -1
+    arr.forEach(item => {
+        if (item[id] > highestId) highestId = item[id]
+    });
+    return highestId
+}
+
 function capitalizeString(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }

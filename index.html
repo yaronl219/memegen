@@ -21,6 +21,8 @@
             <nav>
                 <div class="nav-menu-container">
                     <ul class="nav-menu">
+                        <li class="header-link-upload" onclick="onImgUploadClicked()">Upload</li>
+                        <input type="file" class="file-input btn hidden" name="image" onchange="onImgInput(event)" />
                         <li class="header-link-memes" onclick="savedMemesScreenInit()">Memes</li>
                         <li class="header-link-gallery nav-link-selected" onclick="onGalleryInit()">Gallery</li>
                         <li class="header-link-about" onclick="aboutScreenInit()">About</li>
@@ -30,13 +32,16 @@
                 <button onclick="openHamburgerMenu()" class="hamburger-menu-btn">
                     ☰
                 </button>
+
             </nav>
 
         </div>
     </header>
     <main>
         <modal>
-            <div class="canvas-place-marker hidden">|</div>
+            <div class="canvas-place-marker-container">
+                <div class="canvas-place-marker hidden">|</div>
+            </div>
         </modal>
         <div class="main-container">
             <div class="canvas-area-container">

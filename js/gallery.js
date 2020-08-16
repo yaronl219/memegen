@@ -83,10 +83,12 @@ function populateGallery(arr) {
 }
 
 function getAspectRatio(imgId) {
+
     const imgAspectRatio = calculateAspectRatio(imgId)
     const widthRatio = 500 / imgAspectRatio.imgWidth
     const newWidth = 500
     const newHeight = imgAspectRatio.imgHeight * widthRatio
+    console.log(imgAspectRatio)
     gCanvasSize.defaultWidth = newWidth
     gCanvasSize.defaultHeight = newHeight
     gCanvasSize.width = newWidth
@@ -94,6 +96,7 @@ function getAspectRatio(imgId) {
     const resizeBy = (window.innerWidth < 650) ? 0.7 : 1
     resizeCanvas(newWidth * resizeBy, newHeight * resizeBy)
     repositionOnResize(1, (newHeight * resizeBy / 500))
+
 }
 
 function selectImageAndStartEdit(imgId) {

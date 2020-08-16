@@ -49,9 +49,30 @@ function dragImage(x, y, clientX, clientY) {
     var selectedLine = isClickedPixelLine(clientX, clientY)
     if (selectedLine === false) return
     switchToLineNumber(selectedLine)
-    if (!checkIfDragOutOfBounds(x, y, selectedLine)) {
-        gMeme.lines[selectedLine].top += y
-        gMeme.lines[selectedLine].left += x
+    gMeme.lines[selectedLine].top += y
+    gMeme.lines[selectedLine].left += x
+
+}
+
+function hideEditMarkerIfOutOfBounds() {
+    const elMarker = document.querySelector('.canvas-place-marker')
+    const canvasBounds = {
+        left: gCanvas.offsetLeft,
+        right: gCanvas.offsetLeft + gCanvas.offsetWidth,
+        top: gCanvas.offsetTop,
+        bottom: gCanvas.offsetTop + gCanvas.offsetHeight
+    }
+
+    const elMarkerContainer = document.querySelector('.canvas-place-marker-container')
+        // if out of bounds
+    if (parseInt(elMarker.style.left) < canvasBounds.left ||
+        parseInt(elMarker.style.top) < canvasBounds.top ||
+        parseInt(elMarker.style.left) > canvasBounds.right ||
+        parseInt(elMarker.style.bottom) > canvasBounds.bottom) {
+        elMarkerContainer.classList.add('hidden')
+    } else {
+        elMarkerContainer.classList.remove('hidden')
+
     }
 
 }
