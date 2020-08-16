@@ -3,9 +3,9 @@
 var gCanvas;
 var gCtx;
 var gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
-var gIsCanvasTarget = false
-var gTimeInterval = { 'blink': 0, 'reposition': 0 };
 var gTouchCoords;
+var gTimeInterval = { 'blink': 0, 'reposition': 0 };
+var gCurrImage;
 
 function init() {
     toggleEventListeners(true)
@@ -21,7 +21,7 @@ function onShareMeme(elForm, ev) {
 
     setTimeout(() => {
         shareButton.classList.toggle('loading')
-    }, 2000)
+    }, 3000)
 }
 
 function onImgUploadClicked() {
@@ -31,14 +31,12 @@ function onImgUploadClicked() {
 function onSaveMeme() {
     saveMemeToStorage()
     setTimeout(() => savedMemesScreenInit(), 100)
-
 }
 
 function displayWarning(txt) {
     const warningEl = document.querySelector('.flashing-notice-modal')
     warningEl.innerText = txt
     fadeInOutAnimation(warningEl, 300, 3000, 90)
-
 }
 
 function onTouchStartAndEnd(ev, isTouchStart) {
@@ -56,14 +54,14 @@ function onTouchMove(ev) {
         const movementX = clientX - gTouchCoords.x
         const movementY = clientY - gTouchCoords.y
         gTouchCoords = { x: gTouchCoords.x += movementX, y: gTouchCoords.y += movementY }
-        dragImage(movementX, movementY, clientX - gCanvas.offsetLeft, clientY - gCanvas.offsetTop)
+        dragLine(movementX, movementY, clientX - gCanvas.offsetLeft, clientY - gCanvas.offsetTop)
         renderMeme()
     }
 }
 
 function onMouseDrag(ev) {
     if (ev.buttons > 0 && ev.target === gCanvas) {
-        dragImage(ev.movementX, ev.movementY, ev.clientX - gCanvas.offsetLeft, ev.clientY - gCanvas.offsetTop)
+        dragLine(ev.movementX, ev.movementY, ev.clientX - gCanvas.offsetLeft, ev.clientY - gCanvas.offsetTop)
         renderMeme()
     }
 }
@@ -75,9 +73,9 @@ function drawEditMarker(shouldStart) {
 
 
     if (shouldStart) {
-        startInterval()
+        (startInterval())
     } else {
-        stopInterval()
+        (stopInterval())
     }
 
     function startInterval() {
@@ -99,7 +97,6 @@ function drawEditMarker(shouldStart) {
         clearInterval(gTimeInterval.reposition)
         displayMarker.classList.add('hidden')
     }
-
 }
 
 function openHamburgerMenu() {
@@ -129,9 +126,6 @@ function highlightRelevantNavs(state) {
     if (!elements[state]) return
         // add the selected class
     elements[state].forEach(el => el.classList.add('nav-link-selected'))
-
-
-
 }
 
 function onWindowClick(event) {
@@ -141,6 +135,7 @@ function onWindowClick(event) {
         onSelectLineDirectly(event)
     } else {
         if (gCanvas) {
+            // if gCanvas is not null - means we are in the edit meme screen
             drawEditMarker(false)
             renderMeme(false, false)
         }
@@ -148,13 +143,9 @@ function onWindowClick(event) {
 }
 
 function onSelectLineDirectly(event) {
-    // console.log(event)
-    const xAxis = event.offsetX
-    const yAxis = event.offsetY
-    selectLineDirectly(xAxis, yAxis)
+    selectLineDirectly(event.offsetX, event.offsetY)
     updateTextController()
     drawEditMarker(true)
-
 }
 
 function checkWindowWidth() {
@@ -171,17 +162,15 @@ function checkWindowWidth() {
 }
 
 function onDownload(elLink) {
-    drawImgFromlocal(true)
-
+    renderMeme(false)
+    downloadMeme()
 }
 
 function resizeCanvas(width, height) {
     gCanvasSize.width = width
     gCanvasSize.height = height
-    const widthRatio = gCanvasSize.width / gCanvasSize.defaultWidth
-    const heightRatio = gCanvasSize.height / gCanvasSize.defaultHeight
-    gCanvasSize.widthRatio = widthRatio
-    gCanvasSize.heightRatio = heightRatio
+    gCanvasSize.widthRatio = gCanvasSize.width / gCanvasSize.defaultWidth
+    gCanvasSize.heightRatio = gCanvasSize.height / gCanvasSize.defaultHeight
     gCanvas.height = height
     gCanvas.width = width
     renderMeme(true)
@@ -194,16 +183,18 @@ function switchToSavedMemesScreen() {
     savedMemesScreenInit()
 }
 
-function onSwitchLine() {
-    switchToNextLine()
-    updateTextController()
+function selectLineDirectly(x, y) {
+    const selectedLine = isClickedPixelLine(x, y)
+    if (selectedLine === false) return
+    switchToLineNumber(selectedLine)
+    renderMeme()
 }
 
 function onChangeColor(el, kind) {
     const palette = document.querySelector('.color-pallete-modal')
     palette.classList.toggle('hidden')
     const color = el.style.backgroundColor
-    console.log(color)
+
     if (kind === 'fill') {
         changeTextColor(color)
     } else {
@@ -233,11 +224,11 @@ function onRemoveLine() {
 
 function updateTextController() {
     const layerCounter = document.querySelector('.layer-counter')
-    const lineObj = getCurrentLineAndLineCount()
-    const currLine = lineObj.currLine
-    const totalLines = lineObj.totalLines
+    const line = getCurrentLineAndLineCount()
+    const currLine = line.currLine
+    const totalLines = line.totalLines
     layerCounter.innerHTML = `<span class="chosen-line">${currLine+1}</span><span>/${totalLines}</span>`
-    const currLineText = lineObj.txt
+    const currLineText = line.txt
     updateTextInputsValue(currLineText)
 }
 
@@ -247,24 +238,36 @@ function onChangeFont() {
     renderMeme()
 }
 
-function onEditTextLineParameters(clickedButton) {
-    changeTextParameters(clickedButton)
+function onChangeFontSize(val) {
+    changeFontSize(val)
+}
+
+function onChangeTextAlignment(clickedButton) {
+    changeTextAlignment(clickedButton)
     renderMeme()
+}
+
+function onSwitchLine() {
+    switchToNextLine()
+    updateTextController()
 }
 
 function startMemeEdit() {
     highlightRelevantNavs(false)
     createCanvas()
-    document.querySelector('.canvas-container').style.backgroundImage = `url(${getMemeImg(gMeme.selectedImgId)})`
 }
 
-function renderMeme(shouldDrawImage = false, shouldDrawOutline = true) {
+function renderMeme(shouldDrawOutline = true) {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+    drawImage()
     getMemeLines(shouldDrawOutline)
-    if (shouldDrawImage) {
-        drawImgFromlocal()
-    }
+
 }
+
+function drawImage() {
+    gCtx.drawImage(gCurrImage, 0, 0, gCanvas.width, gCanvas.height)
+}
+
 
 function setTextLine(el) {
     const txt = el.value
@@ -275,4 +278,39 @@ function setTextLine(el) {
 function updateTextInputsValue(txt) {
     const textInputs = document.querySelectorAll('.textline-edit-input')
     textInputs.forEach(input => input.value = txt)
+}
+
+
+function initMemeEditor() {
+    getAspectRatio()
+    checkWindowWidth()
+    renderMeme()
+    scrollToTop()
+    updateTextInputsValue(getFirstLineOfText())
+}
+
+function renderImage() {
+
+    gCurrImage = new Image()
+    gCurrImage.crossOrigin = 'anonymous'
+    gCurrImage.src = getMemeImg(getSelectedImgId())
+
+    gCurrImage.onload = () => {
+        let font = new FontFaceObserver('impact');
+        font.load().then(initMemeEditor);
+
+    }
+}
+
+function toggleEventListeners(shouldAdd) {
+    if (shouldAdd) {
+        document.addEventListener('click', () => onWindowClick(event))
+        document.addEventListener('mousemove', () => onMouseDrag(event))
+        document.addEventListener('touchmove', () => onTouchMove(event))
+        document.addEventListener('touchstart', () => onTouchStartAndEnd(event, true))
+        document.addEventListener('touchend', () => onTouchStartAndEnd(event, false))
+
+    } else {
+        document.removeEventListener('click', () => onWindowClick(event))
+    }
 }

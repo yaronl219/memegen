@@ -4,36 +4,21 @@
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
-    lines: [{
-        txt: 'I\'m a text placeholder',
-        size: 46,
-        align: 'center',
-        textColor: 'white',
-        borderColor: 'black',
-        fontFamily: 'Custom-Impact',
-        top: 100,
-        left: 250,
-        boundingBox: {
-            left: 0,
-            top: 0,
-            width: 0,
-            height: 0
-        }
-    }]
+    lines: [getDefaultLine()]
 }
 
 function resetMeme() {
     gCanvasSize = { defaultWidth: 500, defaultHeight: 500, width: 500, height: 500, widthRatio: 1, heightRatio: 1, isSmall: false }
 }
 
-function resetLines() {
-    gMeme.lines = [{
-        txt: 'I\'m a text placeholder',
+function getDefaultLine() {
+    return {
+        txt: 'Edit me',
         size: 46,
         align: 'center',
         textColor: 'white',
         borderColor: 'black',
-        fontFamily: 'Custom-Impact',
+        fontFamily: 'impact',
         top: 100,
         left: 250,
         boundingBox: {
@@ -42,10 +27,14 @@ function resetLines() {
             width: 0,
             height: 0
         }
-    }]
+    }
 }
 
-function dragImage(x, y, clientX, clientY) {
+function resetLines() {
+    gMeme.lines = [getDefaultLine()]
+}
+
+function dragLine(x, y, clientX, clientY) {
     var selectedLine = isClickedPixelLine(clientX, clientY)
     if (selectedLine === false) return
     switchToLineNumber(selectedLine)
@@ -100,17 +89,13 @@ function getTextEditParams() {
     return { xCoord, yCoord, fontSize }
 }
 
-function toggleEventListeners(shouldAdd) {
-    if (shouldAdd) {
-        document.addEventListener('click', () => onWindowClick(event))
-        document.addEventListener('mousemove', () => onMouseDrag(event))
-        document.addEventListener('touchmove', () => onTouchMove(event))
-        document.addEventListener('touchstart', () => onTouchStartAndEnd(event, true))
-        document.addEventListener('touchend', () => onTouchStartAndEnd(event, false))
 
-    } else {
-        document.removeEventListener('click', () => onWindowClick(event))
-    }
+function changeFontSize(val) {
+    const oper = (val === '+') ? 2 : -2
+    console.log(gMeme.lines[gMeme.selectedLineIdx].fontSize)
+    gMeme.lines[gMeme.selectedLineIdx].size += oper
+    console.log(gMeme.lines[gMeme.selectedLineIdx].size)
+
 }
 
 function repositionOnResize(width, height) {
@@ -143,23 +128,10 @@ function createLine() {
     } else {
         newLineTop = Math.round(canvasHeight / 2)
     }
-    var lineObject = {
-        txt: 'Edit text',
-        size: 40,
-        align: 'center',
-        textColor: 'white',
-        borderColor: 'black',
-        fontFamily: 'Custom-Impact',
-        top: newLineTop,
-        left: Math.round(canvasWidth / 2),
-        boundingBox: {
-            left: 0,
-            top: 0,
-            width: 0,
-            height: 0
-        }
-    }
-    gMeme.lines.push(lineObject)
+    var line = getDefaultLine()
+    line.top = newLineTop
+    line.left = Math.round(canvasWidth / 2)
+    gMeme.lines.push(line)
         // return the amount of lines (now the last row)
     return amountOfLines
 }
@@ -191,16 +163,11 @@ function isClickedPixelLine(x, y) {
     return false
 }
 
-function selectLineDirectly(x, y) {
-    const selectedLine = isClickedPixelLine(x, y)
-    if (selectedLine === false) return
-    return switchToLineNumber(selectedLine)
-}
+
 
 function switchToLineNumber(num) {
     if (num >= gMeme.lines.length) return
     gMeme.selectedLineIdx = num
-    renderMeme()
     drawOutlineBox()
 }
 
@@ -214,15 +181,8 @@ function switchToNextLine() {
 }
 
 
-function drawImgFromlocal(shouldDownload = false, ) {
-    var img = new Image()
-    img.crossOrigin = 'anonymous'
-    img.src = getMemeImg(gMeme.selectedImgId)
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height) //img,x,y,xend,yend
-        getMemeLines(false)
-        if (shouldDownload) { downloadMeme() }
-    }
+function getSelectedImgId() {
+    return gMeme.selectedImgId
 }
 
 
@@ -236,35 +196,20 @@ function downloadMeme() {
     document.body.removeChild(elLink)
 }
 
-function changeTextParameters(param) {
-
-    switch (param) {
-        case '+':
-            gMeme.lines[gMeme.selectedLineIdx].size += 2
-            break;
-        case '-':
-            gMeme.lines[gMeme.selectedLineIdx].size -= 2
-            break;
-        case 'up':
-            gMeme.lines[gMeme.selectedLineIdx].top -= 5
-            break;
-        case 'down':
-            gMeme.lines[gMeme.selectedLineIdx].top += 5
-            break;
-        case 'left':
-            gMeme.lines[gMeme.selectedLineIdx].left -= 5
-            break;
-        case 'right':
-            gMeme.lines[gMeme.selectedLineIdx].left += 5
-            break;
+function changeTextAlignment(align) {
+    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    switch (align) {
         case 'alignLeft':
-            gMeme.lines[gMeme.selectedLineIdx].align = 'left'
+            currLine.align = 'left'
+            currLine.left = 1
             break;
         case 'alignCenter':
-            gMeme.lines[gMeme.selectedLineIdx].align = 'center'
+            currLine.align = 'center'
+            currLine.left = Math.round(gCanvasSize.width / 2)
             break;
         case 'alignRight':
-            gMeme.lines[gMeme.selectedLineIdx].align = 'right'
+            currLine.align = 'right'
+            currLine.left = gCanvasSize.width - 1
             break;
     }
     updateBoundingBoxParams()
@@ -275,17 +220,24 @@ function getMemeLines(shouldDrawOutline = true) {
         drawText(idx, line.left, line.top)
     });
     updateBoundingBoxParams()
+
     if (shouldDrawOutline) {
         drawOutlineBox()
     }
 }
 
-
-
 function changeTextLine(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
     renderMeme()
     drawOutlineBox()
+}
+
+function getFirstLineOfText() {
+    return getLineText(0)
+}
+
+function getLineText(lineIdx) {
+    return gMeme.lines[lineIdx].txt
 }
 
 function getMemeImg(id) {
@@ -296,7 +248,7 @@ function getMemeImg(id) {
 function updateBoundingBoxParams() {
     gMeme.lines.forEach((line, idx) => {
         // const textSize = drawText(currLineIdx, gMeme.lines[currLineIdx].left, gMeme.lines[currLineIdx].top,false)
-        const currLineBoundingBox = drawOutlineBox(idx, false)
+        const currLineBoundingBox = calculateOutlineBox(idx)
         line.boundingBox.left = currLineBoundingBox.boundingBoxLeft
         line.boundingBox.top = currLineBoundingBox.boundingBoxTop
         line.boundingBox.height = currLineBoundingBox.boundingBoxHeight
@@ -304,7 +256,7 @@ function updateBoundingBoxParams() {
     })
 }
 
-function drawOutlineBox(line = gMeme.selectedLineIdx, draw = true) {
+function calculateOutlineBox(line = gMeme.selectedLineIdx) {
     const fixedPadding = 15
     const currLineIdx = line
     const textSize = drawText(currLineIdx, gMeme.lines[currLineIdx].left, gMeme.lines[currLineIdx].top, false)
@@ -313,17 +265,20 @@ function drawOutlineBox(line = gMeme.selectedLineIdx, draw = true) {
     const boundingBoxWidth = textSize.width + (fixedPadding * 2)
     const boundingBoxHeight = textSize.actualBoundingBoxAscent + (fixedPadding * 2)
 
-    if (draw) {
-        gCtx.lineWidth = '1';
-        gCtx.strokeStyle = 'white'
-        gCtx.setLineDash([6, 2])
-        gCtx.strokeRect(boundingBoxLeft, boundingBoxTop, boundingBoxWidth, boundingBoxHeight)
-        gCtx.lineWidth = '1';
-        gCtx.strokeStyle = 'black'
-        gCtx.setLineDash([6, 2])
-        gCtx.strokeRect(boundingBoxLeft - 1, boundingBoxTop - 1, boundingBoxWidth + 1, boundingBoxHeight + 1)
-    }
     return { boundingBoxTop, boundingBoxLeft, boundingBoxWidth, boundingBoxHeight }
+}
+
+function drawOutlineBox(line = gMeme.selectedLineIdx) {
+    const boundingBoxSize = calculateOutlineBox()
+    gCtx.lineWidth = '1';
+    gCtx.strokeStyle = 'white'
+    gCtx.setLineDash([6, 2])
+    gCtx.strokeRect(boundingBoxSize.boundingBoxLeft, boundingBoxSize.boundingBoxTop, boundingBoxSize.boundingBoxWidth, boundingBoxSize.boundingBoxHeight)
+    gCtx.lineWidth = '1';
+    gCtx.strokeStyle = 'black'
+    gCtx.setLineDash([6, 2])
+    gCtx.strokeRect(boundingBoxSize.boundingBoxLeft - 1, boundingBoxSize.boundingBoxTop - 1, boundingBoxSize.boundingBoxWidth + 1, boundingBoxSize.boundingBoxHeight + 1)
+
 }
 
 
@@ -331,9 +286,9 @@ function drawText(idx, x, y, draw = true) {
     const text = gMeme.lines[idx].txt
     gCtx.lineWidth = '2';
     gCtx.setLineDash([1, 0])
+    gCtx.font = `${gMeme.lines[idx].size}px ${gMeme.lines[idx].fontFamily}`;
     gCtx.strokeStyle = gMeme.lines[idx].borderColor;
     gCtx.fillStyle = gMeme.lines[idx].textColor;
-    gCtx.font = `${gMeme.lines[idx].size}px ${gMeme.lines[idx].fontFamily}`;
     gCtx.textAlign = gMeme.lines[idx].align;
     if (draw) {
         gCtx.fillText(text, x, y);
@@ -351,26 +306,4 @@ function createCanvas() {
     canvasBase.innerHTML += `<canvas class="canvas canvas-layer" width="${canvasWidth}" height="${canvasHeight}"></canvas>`
     gCanvas = document.querySelector('.canvas-layer')
     gCtx = gCanvas.getContext('2d')
-
-    // toggleCanvasEventListeners(true)
-}
-
-
-function flattenImage() {
-    //  grabs the first layer
-    // var baseLayer = document.querySelector('.canvas-layer-0')
-    var baseLayer = drawImgFromlocal()
-    var baseCtx = baseLayer.getContext('2d')
-
-    var newLayer = document.querySelector('.canvas-layer-1')
-        // appends every layer by order to the first layer
-    for (var i = 1; i < gLayers.length; i++) {
-        newLayer = document.querySelector(`.canvas-layer-${i}`)
-        baseCtx.drawImage(newLayer, 0, 0)
-    }
-    // convert to url
-    var dataUrl = baseLayer.toDataURL()
-    console.log(dataUrl);
-    // return it
-    return dataUrl
 }

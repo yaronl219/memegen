@@ -1,14 +1,3 @@
-const dPad = `
-<div class="text-directional-change-location">
-<button class="text-edit-btn btn-up" label="up" onclick="onEditTextLineParameters('up')"></button>
-<button class="text-edit-btn btn-down" label="down" onclick="onEditTextLineParameters('down')"></button>
-<button class="text-edit-btn btn-left" label="left" onclick="onEditTextLineParameters('left')"></button>
-<button class="text-edit-btn btn-right" label="right" onclick="onEditTextLineParameters('right')"></button>
-</div>
-`
-const hiddenColorInputs = `    <input id="color-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>
-<input id="border-choice" class="color-edit-hidden hidden" type="color" oninput="onChangeFontColor(this)"</input>`
-
 function switchThroughMobileNav(fn) {
     closeHamburgerMenu()
     fn()
@@ -67,18 +56,18 @@ function renderMemeEditScreen() {
         <div class="text-editor-container">
             <div class="text-params">
                 <select class="text-edit-btn select-dropdown" label="font selection" oninput="onChangeFont()">
-                    <option value="Custom-Impact">Impact</option>
+                    <option value="impact">Impact</option>
                     <option value="Roboto">Roboto</option>
                     <option value="Arial">Arial</option>
                 </select>
-                <button class="text-edit-btn btn-minus" label="-" onclick="onEditTextLineParameters('-')"></button>
-                <button class="text-edit-btn btn-plus" label="+" onclick="onEditTextLineParameters('+')"></button>
+                <button class="text-edit-btn btn-minus" label="-" onclick="onChangeFontSize('-')"></button>
+                <button class="text-edit-btn btn-plus" label="+" onclick="onChangeFontSize('+')"></button>
                 <svg width="1" height="24" viewBox="0 0 1 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line x1="0.5" y1="2.18557e-08" x2="0.499999" y2="18" stroke="#727272"/>
                     </svg>
-                <button class="text-edit-btn btn-alignLeft" label="alignLeft" onclick="onEditTextLineParameters('alignLeft')"></button>
-                <button class="text-edit-btn btn-alignCenter" label="alignCenter" onclick="onEditTextLineParameters('alignCenter')"></button>
-                <button class="text-edit-btn btn-alignRight" label="alignRight" onclick="onEditTextLineParameters('alignRight')"></button>
+                <button class="text-edit-btn btn-alignLeft" label="alignLeft" onclick="onChangeTextAlignment('alignLeft')"></button>
+                <button class="text-edit-btn btn-alignCenter" label="alignCenter" onclick="onChangeTextAlignment('alignCenter')"></button>
+                <button class="text-edit-btn btn-alignRight" label="alignRight" onclick="onChangeTextAlignment('alignRight')"></button>
                 <svg width="1" height="24" viewBox="0 0 1 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="0.5" y1="2.18557e-08" x2="0.499999" y2="18" stroke="#727272"/>
                 </svg>

@@ -1,15 +1,12 @@
 function renderAndUploadImg(elForm, ev) {
     ev.preventDefault();
-    drawImgFromlocal(false)
-    setTimeout(() => {
-        uploadImg(elForm)
-    }, 1000)
+    renderMeme(false)
+    uploadImg(elForm)
+
 }
 
 function uploadImg(elForm) {
-
     document.getElementById('imgData').value = gCanvas.toDataURL("image/jpeg");
-
     // A function to be called if request succeeds
     function onSuccess(uploadedImgUrl) {
         uploadedImgUrl = encodeURIComponent(uploadedImgUrl)

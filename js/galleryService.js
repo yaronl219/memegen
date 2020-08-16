@@ -8,11 +8,7 @@ function addImageToGallery(imgUrl) {
     const newImg = { id: newImgId, url: imgUrl, keywords: ['user generated'] }
     gImgs.push(newImg)
     saveImgsToStorage()
-
-    setTimeout(() => {
-        onGalleryInit()
-    }, 500)
-
+    onGalleryInit()
 }
 
 
@@ -93,11 +89,10 @@ function filterByKeword(keyword) {
     return uniqueImages
 }
 
-function calculateAspectRatio(imgId) {
-    const selectedMeme = getIdxById(imgId, gImgs)
-    const img = new Image()
-    img.src = selectedMeme.url
-    return { imgWidth: img.width, imgHeight: img.height }
+function calculateAspectRatio() {
+    // const selectedMeme = getIdxById(imgId, gImgs)
+    // const img = new Image()
+    return { imgWidth: gCurrImage.width, imgHeight: gCurrImage.height }
 }
 
 function saveImgsToStorage() {

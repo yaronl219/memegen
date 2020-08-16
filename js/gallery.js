@@ -7,7 +7,6 @@ function onGalleryInit() {
     renderGalleryScreen()
     renderKeywords()
     populateGallery(gImgs)
-
 }
 
 function onSelectKeyword(keyword) {
@@ -82,13 +81,12 @@ function populateGallery(arr) {
     galleryEl.innerHTML = strHtml
 }
 
-function getAspectRatio(imgId) {
+function getAspectRatio() {
 
-    const imgAspectRatio = calculateAspectRatio(imgId)
+    const imgAspectRatio = calculateAspectRatio(gCurrImage)
     const widthRatio = 500 / imgAspectRatio.imgWidth
     const newWidth = 500
     const newHeight = imgAspectRatio.imgHeight * widthRatio
-    console.log(imgAspectRatio)
     gCanvasSize.defaultWidth = newWidth
     gCanvasSize.defaultHeight = newHeight
     gCanvasSize.width = newWidth
@@ -106,11 +104,16 @@ function selectImageAndStartEdit(imgId) {
     resetLines()
     resetMeme()
     startMemeEdit()
-    changeLineFont('Custom-Impact')
-    getAspectRatio(imgId)
-    checkWindowWidth()
-    renderMeme()
+    changeLineFont('impact')
+    renderImage()
 
+
+
+}
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 function onSearchInput(el) {

@@ -12,7 +12,6 @@ function saveMemeToStorage() {
         savedMemes[makeId()] = memeToSave
         saveToStorage('savedMemes', savedMemes)
     }
-
 }
 
 function removeMemeFromStorage(id) {
@@ -21,6 +20,10 @@ function removeMemeFromStorage(id) {
     saveToStorage('savedMemes', savedMemes)
 }
 
+function getSavedMemeImgUrlById(id) {
+    const savedMemes = loadMemesFromStorage()
+    return savedMemes[id].memeDetails.selectedImgId
+}
 
 function setSavedMeme(id) {
     const savedMemes = loadMemesFromStorage()

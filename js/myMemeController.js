@@ -12,7 +12,7 @@ function savedMemesScreenInit() {
 
 function onRemoveMeme(id) {
     removeMemeFromStorage(id)
-    setTimeout(() => savedMemesScreenInit(), 100)
+    savedMemesScreenInit()
 }
 
 function renderSavedMemes(memeObject) {
@@ -39,6 +39,5 @@ function selectSavedMemeAndStartEditing(id) {
     renderMemeEditScreen()
     updateTextController()
     startMemeEdit()
-    renderMeme()
-    checkWindowWidth()
+    renderImage()
 }
