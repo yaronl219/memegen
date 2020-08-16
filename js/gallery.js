@@ -109,6 +109,7 @@ function selectImageAndStartEdit(imgId) {
     changeLineFont('Custom-Impact')
     getAspectRatio(imgId)
     checkWindowWidth()
+    renderMeme()
 
 }
 
