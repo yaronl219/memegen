@@ -82,14 +82,14 @@ function drawEditMarker(shouldStart) {
 
     function startInterval() {
         stopInterval()
-        gTimeInterval.blink = setInterval(() => {
+        gTimeInterval.reposition = setInterval(() => {
             var displayMarkerParams = getTextEditParams()
             displayMarker.style.fontSize = `${displayMarkerParams.fontSize *1.4}px`
             displayMarker.style.top = `${displayMarkerParams.yCoord + canvasLocation.offsetTop }px`
             displayMarker.style.left = `${displayMarkerParams.xCoord+ canvasLocation.offsetLeft - 15}px`
-            hideEditMarkerIfOutOfBounds()
         }, 10);
         gTimeInterval.blink = setInterval(() => {
+            hideEditMarkerIfOutOfBounds()
             displayMarker.classList.toggle('hidden')
         }, 500)
     }
