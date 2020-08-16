@@ -2,6 +2,7 @@
 
 function onGalleryInit() {
     highlightRelevantNavs('gallery')
+    loadImgsFromStorage()
     loadKeywords()
     renderGalleryScreen()
     renderKeywords()
@@ -95,8 +96,6 @@ function getAspectRatio(imgId) {
     repositionOnResize(1, (newHeight * resizeBy / 500))
 }
 
-
-
 function selectImageAndStartEdit(imgId) {
     gMeme.selectedImgId = imgId
     renderMemeEditScreen()
@@ -117,7 +116,6 @@ function onSearchInput(el) {
     highlightKeyword(inputValue)
     populateGallery(filteredList)
 }
-
 
 function renderGalleryScreen() {
     const el = document.querySelector('.main-container')

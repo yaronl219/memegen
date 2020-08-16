@@ -7,11 +7,21 @@ var gIsCanvasTarget = false
 var gTimeInterval = { 'blink': 0, 'reposition': 0 };
 var gTouchCoords;
 
-
-
 function init() {
     toggleEventListeners(true)
     onGalleryInit()
+}
+
+function onShareMeme(elForm, ev) {
+    const shareButton = document.querySelector('.share-btn')
+    shareButton.classList.toggle('loading')
+        // calling the upload img function
+    renderAndUploadImg(elForm, ev)
+        // changing back from loader after 2 seconds have passed
+
+    setTimeout(() => {
+        shareButton.classList.toggle('loading')
+    }, 2000)
 }
 
 function onSaveMeme() {
@@ -26,8 +36,6 @@ function displayWarning(txt) {
     fadeInOutAnimation(warningEl, 300, 3000, 90)
 
 }
-
-
 
 function onTouchStartAndEnd(ev, isTouchStart) {
     if (isTouchStart && ev.target === gCanvas) {
@@ -185,17 +193,22 @@ function onSwitchLine() {
     updateTextController()
 }
 
-function onChangeColor(el, kind, color) {
-    const palette = document.querySelector('.color-pallete-container')
+function onChangeColor(el, kind) {
+    const palette = document.querySelector('.color-pallete-modal')
     palette.classList.toggle('hidden')
-    if (kind === 'text') {
+    const color = el.style.backgroundColor
+    console.log(color)
+    if (kind === 'fill') {
         changeTextColor(color)
     } else {
         changeTextBorderColor(color)
     }
 }
 
-
+function onEnterColorText(el) {
+    const elColorDisplay = document.querySelector('.color-picker-display')
+    elColorDisplay.style.backgroundColor = el.value
+}
 
 function onAddLine() {
     const newLineIdx = createLine()
@@ -252,8 +265,6 @@ function setTextLine(el) {
     changeTextLine(txt)
     updateTextInputsValue(txt)
 }
-
-
 
 function updateTextInputsValue(txt) {
     const textInputs = document.querySelectorAll('.textline-edit-input')
