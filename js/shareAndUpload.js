@@ -2,7 +2,6 @@ function renderAndUploadImg(elForm, ev) {
     ev.preventDefault();
     renderMeme(false)
     uploadImg(elForm)
-
 }
 
 function uploadImg(elForm) {

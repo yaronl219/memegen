@@ -92,9 +92,7 @@ function getTextEditParams() {
 
 function changeFontSize(val) {
     const oper = (val === '+') ? 2 : -2
-    console.log(gMeme.lines[gMeme.selectedLineIdx].fontSize)
     gMeme.lines[gMeme.selectedLineIdx].size += oper
-    console.log(gMeme.lines[gMeme.selectedLineIdx].size)
 
 }
 

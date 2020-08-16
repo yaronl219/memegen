@@ -3,7 +3,6 @@ function switchThroughMobileNav(fn) {
     fn()
 }
 
-
 function aboutScreenInit() {
     highlightRelevantNavs('about')
     renderAboutScreen()
@@ -26,8 +25,6 @@ function renderAboutScreen() {
     const el = document.querySelector('.main-container')
     el.innerHTML = strHtml
 }
-
-
 
 function renderMemeEditScreen() {
     const el = document.querySelector('.main-container')
